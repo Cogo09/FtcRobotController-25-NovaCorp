@@ -29,7 +29,7 @@ public class FarREDautonoball extends LinearOpMode {
         robot = new AUTOHARDWARE(this, hardwareMap, new Pose2d(50,15,Math.toRadians(180)));
         waitForStart();
         if (opModeIsActive()){
-            robot.farrednoball();
+            robot.newauto();
             //robot.red18();
             blackboard.put(currentpose,robot.drive.localizer.getPose());
         }

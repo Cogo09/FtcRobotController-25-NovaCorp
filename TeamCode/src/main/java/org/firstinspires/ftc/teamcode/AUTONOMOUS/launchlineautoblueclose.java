@@ -29,7 +29,7 @@ public class launchlineautoblueclose extends LinearOpMode {
         robot = new AUTOHARDWARE(this, hardwareMap, new Pose2d(-52,-50,Math.toRadians(220)));
         waitForStart();
         if (opModeIsActive()){
-            robot.closebluenoball();
+            robot.newauto();
             //robot.red18();
             blackboard.put(currentpose,robot.drive.localizer.getPose());
         }
