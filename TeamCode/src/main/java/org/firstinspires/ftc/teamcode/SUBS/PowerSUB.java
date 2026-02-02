@@ -18,26 +18,22 @@ import java.util.List;
 public class PowerSUB {
     private DcMotor intakeR;
     private DcMotor intakeL;
-    private DcMotorEx gunmotorR;
-    private DcMotorEx gunmotorL;
+    private DcMotorEx shooterR;
+    private DcMotorEx shooterL;
 
-    public enum gunSTATE {ON, OFF, REVERSE, MATCH,LEFTSHOT,RIGHTSHOT,MIDSHOT, IDLE}
+    public enum gunSTATE {ON, OFF, EXTRA, IDLE}
 //!help
     private PowerSUB.gunSTATE gunStateVar = PowerSUB.gunSTATE.IDLE;
 
-    public void gunon() {
+    public void power() {
         gunStateVar = gunSTATE.ON;
     }
 
     public void gunoff() {
         gunStateVar = gunSTATE.OFF;
     }
-    public void gunreverse(){gunStateVar = gunSTATE.REVERSE;}
-    public void gunmatch(){gunStateVar = gunSTATE.MATCH;}
+    public void extrapower(){gunStateVar = gunSTATE.EXTRA;}
     public void gunidle(){gunStateVar = gunSTATE.IDLE;}
-    public void gunleftshot(){gunStateVar = gunSTATE.LEFTSHOT;}
-    public void gunrightshot(){gunStateVar = gunSTATE.RIGHTSHOT;}
-    public void gunmidshot(){gunStateVar = gunSTATE.MIDSHOT;}
 
     public enum intakeSTATE {ON, OFF, REVERSE, IDLE}
 
@@ -56,17 +52,17 @@ public class PowerSUB {
 
     //this is where you put all enums and variables
     public PowerSUB(HardwareMap hwMap) {
-        gunmotorL = hwMap.get(DcMotorEx.class,"gunmotorL");
-        gunmotorR = hwMap.get(DcMotorEx.class,"gunmotorR");
+        shooterL = hwMap.get(DcMotorEx.class,"shooterL");
+        shooterR = hwMap.get(DcMotorEx.class,"shooterR");
         intakeR = hwMap.get(DcMotor.class,"intakeR");
         intakeL = hwMap.get(DcMotor.class, "intakeL");
         intakeL.setDirection(DcMotorSimple.Direction.REVERSE);
         intakeR.setDirection(DcMotorSimple.Direction.FORWARD);
-        gunmotorL.setDirection(DcMotorSimple.Direction.FORWARD);
-        gunmotorR.setDirection(DcMotorSimple.Direction.REVERSE);
+        shooterL.setDirection(DcMotorSimple.Direction.FORWARD);
+        shooterR.setDirection(DcMotorSimple.Direction.REVERSE);
         PIDFCoefficients pidfCoefficients = new PIDFCoefficients(FlyUTIL.p, 0, 0, FlyUTIL.f);
-        gunmotorL.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, pidfCoefficients);
-        gunmotorR.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, pidfCoefficients);
+        shooterL.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, pidfCoefficients);
+        shooterR.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, pidfCoefficients);
 
     }
 
@@ -92,41 +88,25 @@ public class PowerSUB {
 
         switch (gunStateVar) {
             case ON:
-                gunmotorR.setVelocity(0.9*FlyUTIL.highvelo);
+                shooterL.setVelocity(0.9*FlyUTIL.highvelo);
 
-                gunmotorL.setVelocity(0.9*FlyUTIL.highvelo);
+                shooterR.setVelocity(0.9*FlyUTIL.highvelo);
                 break;
             case OFF:
-                gunmotorL.setVelocity(0.7);
+                shooterL.setVelocity(0.7);
 
-                gunmotorR.setVelocity(0.7);
+                shooterR.setVelocity(0.7);
                 break;
-            case MIDSHOT:
-                gunmotorR.setVelocity(0.8);
-                gunmotorL.setVelocity(0.8);
-            case RIGHTSHOT:
-                gunmotorL.setVelocity(0.9);
 
-                gunmotorR.setVelocity(0.9);
-            case LEFTSHOT:
-                gunmotorR.setVelocity(0);
+            case EXTRA:
+                shooterR.setVelocity(1*FlyUTIL.highvelo);
 
-                gunmotorL.setVelocity(0);
-
-            case REVERSE:
-                gunmotorL.setVelocity(1*FlyUTIL.highvelo);
-
-                gunmotorR.setVelocity(1*FlyUTIL.highvelo);
-                break;
-            case MATCH:
-                gunmotorR.setVelocity(0.9*FlyUTIL.highvelo);
-
-                gunmotorL.setVelocity(0.9*FlyUTIL.highvelo);
+                shooterL.setVelocity(1*FlyUTIL.highvelo);
                 break;
             case IDLE:
-                gunmotorR.setVelocity(0.0*FlyUTIL.highvelo);
+                shooterR.setVelocity(0.0*FlyUTIL.highvelo);
 
-                gunmotorL.setVelocity(0.0*FlyUTIL.highvelo);
+                shooterL.setVelocity(0.0*FlyUTIL.highvelo);
                 break;
         }
     }
@@ -134,8 +114,8 @@ public class PowerSUB {
     // this is where you put your update functions to switch between states
 
     public void telemetry(Telemetry telemetry) {
-        double currentVeloL = gunmotorL.getVelocity();
-        double currentVeloR = gunmotorR.getVelocity();
+        double currentVeloL = shooterR.getVelocity();
+        double currentVeloR = shooterL.getVelocity();
         telemetry.addData("RVELO",currentVeloR);
         telemetry.addData("LVELO",currentVeloL);
 

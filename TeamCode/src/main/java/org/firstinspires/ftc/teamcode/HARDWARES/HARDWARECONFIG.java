@@ -37,9 +37,6 @@ import java.util.List;
 
 public class HARDWARECONFIG {
     boolean slowmode = false;
-    boolean rdown = false;
-    boolean ldown = true;
-    boolean stickdown = true;
     Telemetry telemetry = null;
     LinearOpMode opMode = null;
     public SERVOSUB servosub = null;
@@ -82,7 +79,7 @@ public class HARDWARECONFIG {
 
     public HARDWARECONFIG(LinearOpMode om, HardwareMap hwmap, Boolean auto) {
         initrobot(hwmap, om, auto);
-        servosub = new SERVOSUB(hwmap);
+
         powersub = new PowerSUB(hwmap);
 
     }
@@ -99,16 +96,7 @@ public class HARDWARECONFIG {
         backLeftMotor = hwmap.dcMotor.get("backLeftMotor");
         frontRightMotor = hwmap.dcMotor.get("frontRightMotor");
         backRightMotor = hwmap.dcMotor.get("backRightMotor");
-//        gunmotorR = hwmap.dcMotor.get("gunmotorR");
-//        gunmotorL = hwmap.dcMotor.get("gunmotorL");
-//        intakeR = hwmap.dcMotor.get("intakeR");
-//        intakeL = hwmap.dcMotor.get("intakeL");
-//        redLed = hwmap.get(LED.class, "led_red");
-//        greenLed = hwmap.get(LED.class, "led_green");
-//        redLed1 = hwmap.get(LED.class,"led_red1");
-//        greenLed1 = hwmap.get(LED.class,"led_green1");
-//        redLed2 = hwmap.get(LED.class,"led_red2");
-//        greenLed2 = hwmap.get(LED.class,"led_green2");
+
         dash = FtcDashboard.getInstance();
         colorSensor = hwmap.get(RevColorSensorV3.class,"colorsensor");
 
@@ -175,9 +163,6 @@ public class HARDWARECONFIG {
     }
 
     public static String currentpose = "currentpose";
-    public void Powermotorstart(){
-        powersub.gunmatch();
-    }
 
 //    public void SetRedLED(boolean isOn) {
 //        if (isOn) {
@@ -360,35 +345,7 @@ public class HARDWARECONFIG {
         }
         touchpadwpressed = touchpadpressed;
         double slowmodemultiplier = 0.5;
-        if (opMode.gamepad1.rightStickButtonWasPressed()){
-            stickdown = !stickdown; Scribe.getInstance().logData("stickdown is togled to"+stickdown);
-        }
-        if (!stickdown){
-            servosub.MELEdown();
-        }
-        if (stickdown){
-            servosub.MELEslight();
-        }
-        if (opMode.gamepad2.circleWasPressed()) {
-            rdown = !rdown; Scribe.getInstance().logData("rdown is togled to"+rdown);
 
-        }
-        if (!rdown){
-            servosub.rscoopup();
-        }
-        if (rdown){
-            servosub.rscoopdown();
-        }
-        if (opMode.gamepad2.squareWasPressed()) {
-            ldown = !ldown;Scribe.getInstance().logData("ldown is toggled to "+ldown);
-        }
-//        Scribe.getInstance().logData(ldown);
-        if (!ldown){
-            servosub.lscoopup();
-        }
-        if (ldown){
-            servosub.lscoopdown();
-        }
 
         touchpadwpressed = touchpadpressed;
 
@@ -441,34 +398,29 @@ public class HARDWARECONFIG {
         } else {
             powersub.intakeoff();
         }
-        if (opMode.gamepad1.dpad_down){
-            servosub.LELEdown();
-            servosub.MELEdown();
-            servosub.RELEdown();
-        }
+
 
 
 
 
         if (opMode.gamepad2.left_trigger > 0) {
-            powersub.gunreverse();
+            powersub.extrapower();
+            powersub.intakeon();
         }else if (opMode.gamepad2.right_trigger > 0){
-            powersub.gunon();
+            powersub.power();
+            powersub.intakeon();
         }else {
             powersub.gunidle();
         }
-        if (opMode.gamepad2.left_bumper) {
-            lockit();
+
+        if (opMode.gamepad2.dpad_up){
+            servosub.SafetyON();
         }
-        if(opMode.gamepad1.a){
-            servosub.MELEslight();
+        else if (opMode.gamepad2.dpad_down){
+            servosub.Safetyoff();
         }
 
-        if (opMode.gamepad2.dpad_left) {
-            servosub.LELEup();
-        } else if (opMode.gamepad2.dpad_down) {
-            servosub.LELEdown();
-        }
+
 
 //        if (opMode.gamepad2.x){
 //            servosub.lscoopdown();
@@ -487,17 +439,6 @@ public class HARDWARECONFIG {
 
 
 
-        if (opMode.gamepad2.dpad_right) {
-            servosub.RELEup();
-        } else if (opMode.gamepad2.dpad_down) {
-            servosub.RELEdown();
-        }
-
-        if (opMode.gamepad2.dpad_up) {
-            servosub.MELEup();
-        } else if (opMode.gamepad2.dpad_down) {
-            servosub.MELEdown();
-        }
 
 
 

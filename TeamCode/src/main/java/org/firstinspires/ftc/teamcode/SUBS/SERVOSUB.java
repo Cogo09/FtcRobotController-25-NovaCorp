@@ -15,84 +15,84 @@ import org.firstinspires.ftc.teamcode.HARDWARES.SERVOUTIL;
 import java.util.List;
 
 public class SERVOSUB {
-    private final Servo leftelevatorservo;
-    private final Servo middleelevatorservo;
-    private final Servo rightelevatorservo;
-    private final Servo leftscooperservo;
-    private final Servo rightscooperservo;
+    private final Servo safetyswitch;
+//    private final Servo middleelevatorservo;
+//    private final Servo rightelevatorservo;
+//    private final Servo leftscooperservo;
+//    private final Servo rightscooperservo;
 //    private final Servo bootkickerservo;
 
 
-    public enum LeftELEState {UP, DOWN, IDLE}
+    public enum SafetyState {ON, OFF, IDLE}
 
-    private LeftELEState LeftELEStateVar = LeftELEState.IDLE;
+    private SafetyState SafetyStateVar = SafetyState.IDLE;
 
-    public void LELEup() {
-        LeftELEStateVar = LeftELEState.UP;
+    public void SafetyON() {
+        SafetyStateVar = SafetyState.ON;
     }
 
-    public void LELEdown() {
-        LeftELEStateVar = LeftELEState.DOWN;
+    public void Safetyoff() {
+        SafetyStateVar = SafetyState.OFF;
     }
 
     public void LELEIDLE() {
-        LeftELEStateVar = LeftELEState.IDLE;
+        SafetyStateVar = SafetyState.IDLE;
     }
 
-    public enum RightELEState {UP, DOWN, IDLE}
+//    public enum RightELEState {UP, DOWN, IDLE}
+//
+//    private RightELEState RightELEStateVar = RightELEState.IDLE;
+//
+//    public void RELEup() {
+//        RightELEStateVar = RightELEState.UP;
+//    }
+//
+//    public void RELEdown() {
+//        RightELEStateVar = RightELEState.DOWN;
+//    }
+//
+//    public void RELEIDLE() {
+//        RightELEStateVar = RightELEState.IDLE;
+//    }
+//
+//    public enum MiddleELEState {UP, DOWN,SLIGHT, IDLE}
+//
+//    private MiddleELEState MiddleELEStateVar = MiddleELEState.IDLE;
+//
+//    public void MELEup() {
+//        MiddleELEStateVar = MiddleELEState.UP;
+//    }
+//
+//    public void MELEdown() {
+//        MiddleELEStateVar = MiddleELEState.DOWN;
+//    }
+//    public void MELEslight(){MiddleELEStateVar = MiddleELEState.SLIGHT;}
+//
+//    public void MELEIDLE() {
+//        MiddleELEStateVar = MiddleELEState.IDLE;
+//    }
 
-    private RightELEState RightELEStateVar = RightELEState.IDLE;
-
-    public void RELEup() {
-        RightELEStateVar = RightELEState.UP;
-    }
-
-    public void RELEdown() {
-        RightELEStateVar = RightELEState.DOWN;
-    }
-
-    public void RELEIDLE() {
-        RightELEStateVar = RightELEState.IDLE;
-    }
-
-    public enum MiddleELEState {UP, DOWN,SLIGHT, IDLE}
-
-    private MiddleELEState MiddleELEStateVar = MiddleELEState.IDLE;
-
-    public void MELEup() {
-        MiddleELEStateVar = MiddleELEState.UP;
-    }
-
-    public void MELEdown() {
-        MiddleELEStateVar = MiddleELEState.DOWN;
-    }
-    public void MELEslight(){MiddleELEStateVar = MiddleELEState.SLIGHT;}
-
-    public void MELEIDLE() {
-        MiddleELEStateVar = MiddleELEState.IDLE;
-    }
-
-    public enum RightScooperState {UP,DOWN,IDLE}
-
-    private RightScooperState RightScooperStateVar = RightScooperState.IDLE;
-
-    public void rscoopdown(){RightScooperStateVar = RightScooperState.DOWN;}
-
-    public void rscoopup(){RightScooperStateVar = RightScooperState.UP;}
-
-    public void rscoopidle(){RightScooperStateVar = RightScooperState.IDLE;}
-
-    public enum LeftScooperState {UP,DOWN,IDLE}
-
-    private LeftScooperState LeftScooperStateVar = LeftScooperState.IDLE;
-
-    public void lscoopdown(){LeftScooperStateVar = LeftScooperState.DOWN;}
-
-    public void lscoopup(){LeftScooperStateVar = LeftScooperState.UP;}
-
-    public void lscoopidle(){LeftScooperStateVar = LeftScooperState.IDLE;}
-
-    public enum BootState {UP, DOWN, IDLE}
+//    public enum RightScooperState {UP,DOWN,IDLE}
+//
+//    private RightScooperState RightScooperStateVar = RightScooperState.IDLE;
+//
+//    public void rscoopdown(){RightScooperStateVar = RightScooperState.DOWN;}
+//
+//    public void rscoopup(){RightScooperStateVar = RightScooperState.UP;}
+//
+//    public void rscoopidle(){RightScooperStateVar = RightScooperState.IDLE;}
+//
+//    public enum LeftScooperState {UP,DOWN,IDLE}
+//
+//    private LeftScooperState LeftScooperStateVar = LeftScooperState.IDLE;
+//
+//    public void lscoopdown(){LeftScooperStateVar = LeftScooperState.DOWN;}
+//
+//    public void lscoopup(){LeftScooperStateVar = LeftScooperState.UP;}
+//
+//    public void lscoopidle(){LeftScooperStateVar = LeftScooperState.IDLE;}
+//
+//    public enum BootState {UP, DOWN, IDLE}
 
 //    private BootState BootStateVar = BootState.IDLE;
 //
@@ -112,16 +112,16 @@ public class SERVOSUB {
 
     //this is where you put all enums and variables
     public SERVOSUB(HardwareMap hwMap) {
-        leftelevatorservo = hwMap.get(Servo.class, "leftelevatorservo");
-        middleelevatorservo = hwMap.get(Servo.class, "middleelevatorservo");
-        rightelevatorservo = hwMap.get(Servo.class, "rightelevatorservo");
-        leftscooperservo = hwMap.get(Servo.class,"leftscooperservo");
-        rightscooperservo = hwMap.get(Servo.class,"rightscooperservo");
+        safetyswitch = hwMap.get(Servo.class, "safetyswitch");
+//        middleelevatorservo = hwMap.get(Servo.class, "middleelevatorservo");
+//        rightelevatorservo = hwMap.get(Servo.class, "rightelevatorservo");
+//        leftscooperservo = hwMap.get(Servo.class,"leftscooperservo");
+//        rightscooperservo = hwMap.get(Servo.class,"rightscooperservo");
 //        bootkickerservo = hwMap.get(Servo.class,"bootkickerservo");
-        leftelevatorservo.setDirection(Servo.Direction.FORWARD);
-        middleelevatorservo.setDirection(Servo.Direction.FORWARD);
-        rightelevatorservo.setDirection(Servo.Direction.FORWARD);
-        rightscooperservo.setDirection(Servo.Direction.FORWARD);
+        safetyswitch.setDirection(Servo.Direction.FORWARD);
+//        middleelevatorservo.setDirection(Servo.Direction.FORWARD);
+//        rightelevatorservo.setDirection(Servo.Direction.FORWARD);
+//        rightscooperservo.setDirection(Servo.Direction.FORWARD);
 //        bootkickerservo.setDirection(Servo.Direction.REVERSE);
 
     }
@@ -140,64 +140,64 @@ public class SERVOSUB {
 //
 //                break;
 //        }
-        switch (RightScooperStateVar){
-            case UP:
-                setpose(rightscooperservo, SERVOUTIL.rightscooperup);
+//        switch (RightScooperStateVar){
+//            case UP:
+//                setpose(rightscooperservo, SERVOUTIL.rightscooperup);
+//                break;
+//            case DOWN:
+//                setpose(rightscooperservo, SERVOUTIL.rightscooperdown);
+//                break;
+//            case IDLE:
+//
+//                break;
+//        }
+//        switch (LeftScooperStateVar){
+//            case UP:
+//                setpose(leftscooperservo, SERVOUTIL.leftscooperup);
+//                break;
+//            case DOWN:
+//                setpose(leftscooperservo, SERVOUTIL.leftscooperdown);
+//                break;
+//            case IDLE:
+//
+//                break;
+//        }
+        switch (SafetyStateVar) {
+            case ON:
+                setpose(safetyswitch, SERVOUTIL.safetyon);
                 break;
-            case DOWN:
-                setpose(rightscooperservo, SERVOUTIL.rightscooperdown);
-                break;
-            case IDLE:
-
-                break;
-        }
-        switch (LeftScooperStateVar){
-            case UP:
-                setpose(leftscooperservo, SERVOUTIL.leftscooperup);
-                break;
-            case DOWN:
-                setpose(leftscooperservo, SERVOUTIL.leftscooperdown);
-                break;
-            case IDLE:
-
-                break;
-        }
-        switch (LeftELEStateVar) {
-            case UP:
-                setpose(leftelevatorservo, SERVOUTIL.leftelevatorservoup);
-                break;
-            case DOWN:
-                setpose(leftelevatorservo, SERVOUTIL.leftelevatorservodown);
-                break;
-            case IDLE:
-
-                break;
-        }
-        switch (RightELEStateVar) {
-                case DOWN:
-                setpose(rightelevatorservo, SERVOUTIL.rightelevatorservoup);
-                break;
-            case UP:
-                setpose(rightelevatorservo, SERVOUTIL.rightelevatorservodown);
+            case OFF:
+                setpose(safetyswitch, SERVOUTIL.safetyoff);
                 break;
             case IDLE:
 
                 break;
         }
-        switch (MiddleELEStateVar) {
-            case DOWN:
-                setpose(middleelevatorservo, SERVOUTIL.middleelevatorservoup);
-                break;
-            case UP:
-                setpose(middleelevatorservo, SERVOUTIL.middleelevatorservodown);
-                break;
-            case SLIGHT:
-                setpose(middleelevatorservo,SERVOUTIL.middleelevatorservoupslight);
-                break;
-            case IDLE:
-
-                break;
-        }
+//        switch (RightELEStateVar) {
+//                case DOWN:
+//                setpose(rightelevatorservo, SERVOUTIL.rightelevatorservoup);
+//                break;
+//            case UP:
+//                setpose(rightelevatorservo, SERVOUTIL.rightelevatorservodown);
+//                break;
+//            case IDLE:
+//
+//                break;
+//        }
+//        switch (MiddleELEStateVar) {
+//            case DOWN:
+//                setpose(middleelevatorservo, SERVOUTIL.middleelevatorservoup);
+//                break;
+//            case UP:
+//                setpose(middleelevatorservo, SERVOUTIL.middleelevatorservodown);
+//                break;
+//            case SLIGHT:
+//                setpose(middleelevatorservo,SERVOUTIL.middleelevatorservoupslight);
+//                break;
+//            case IDLE:
+//
+//                break;
+//        }
 
 
     }

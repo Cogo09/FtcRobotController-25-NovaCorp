@@ -15,26 +15,17 @@ import org.gentrifiedApps.gentrifiedAppsUtil.heatseeker.Driver;
 
 public final class ConfigRegistrar {
 
-    static ConfigMaker config = new ConfigMaker("Generated_ROBOTO")
-            .addCamera("Webcam 1","UC684")
+    static ConfigMaker config = new ConfigMaker("Das ROBOTO")
             .addModule(ConfigMaker.ModuleType.EXPANSION_HUB, "Expansion Hub 2",2)
             .addMotor("frontLeftMotor", ConfigMaker.ModuleType.CONTROL_HUB, ConfigMaker.MotorType.goBILDA5201SeriesMotor, 0)
             .addMotor("backLeftMotor", ConfigMaker.ModuleType.CONTROL_HUB, ConfigMaker.MotorType.goBILDA5201SeriesMotor, 1)
             .addMotor("frontRightMotor", ConfigMaker.ModuleType.CONTROL_HUB, ConfigMaker.MotorType.goBILDA5201SeriesMotor, 2)
             .addMotor("backRightMotor", ConfigMaker.ModuleType.CONTROL_HUB, ConfigMaker.MotorType.goBILDA5201SeriesMotor, 3)
-            .addDevice("colorsensor", ConfigMaker.ModuleType.CONTROL_HUB, ConfigMaker.DeviceType.RevColorSensorV3,1)
-            .addDevice("leftelevatorservo", ConfigMaker.ModuleType.EXPANSION_HUB, ConfigMaker.DeviceType.Servo,0)
-            .addDevice("middleelevatorservo", ConfigMaker.ModuleType.EXPANSION_HUB, ConfigMaker.DeviceType.Servo,1)
-            .addDevice("rightelevatorservo", ConfigMaker.ModuleType.EXPANSION_HUB, ConfigMaker.DeviceType.Servo,2)
-            .addDevice("rightscooperservo",ConfigMaker.ModuleType.EXPANSION_HUB, ConfigMaker.DeviceType.Servo,3)
-            .addDevice("leftscooperservo",ConfigMaker.ModuleType.EXPANSION_HUB,ConfigMaker.DeviceType.Servo,4)
-            .addMotor("gunmotorR", ConfigMaker.ModuleType.EXPANSION_HUB, ConfigMaker.MotorType.goBILDA5202SeriesMotor, 2)
-            .addMotor("gunmotorL", ConfigMaker.ModuleType.EXPANSION_HUB, ConfigMaker.MotorType.goBILDA5202SeriesMotor, 3)
-            .addMotor("intakeL", ConfigMaker.ModuleType.EXPANSION_HUB, ConfigMaker.MotorType.goBILDA5201SeriesMotor, 0)
-            .addMotor("intakeR", ConfigMaker.ModuleType.EXPANSION_HUB, ConfigMaker.MotorType.goBILDA5201SeriesMotor, 1)
-            .addMotor("gunmotorR", ConfigMaker.ModuleType.EXPANSION_HUB, ConfigMaker.MotorType.goBILDA5201SeriesMotor, 2)
-            .addDevice("imu",ConfigMaker.ModuleType.EXPANSION_HUB,ConfigMaker.DeviceType.AdafruitBNO055IMU,0)
-            .addMotor("gunmotorL", ConfigMaker.ModuleType.EXPANSION_HUB, ConfigMaker.MotorType.goBILDA5201SeriesMotor, 3);
+            .addMotor("intakeL", ConfigMaker.ModuleType.EXPANSION_HUB, ConfigMaker.MotorType.RevRoboticsCoreHexMotor,0)
+            .addMotor("intakeR",ConfigMaker.ModuleType.EXPANSION_HUB, ConfigMaker.MotorType.RevRoboticsCoreHexMotor,1)
+            .addMotor("shooterL",ConfigMaker.ModuleType.EXPANSION_HUB,ConfigMaker.MotorType.RevRoboticsCoreHexMotor,2)
+            .addMotor("shooterR",ConfigMaker.ModuleType.EXPANSION_HUB,ConfigMaker.MotorType.RevRoboticsCoreHexMotor,3)
+            .addDevice("safetyswitch", ConfigMaker.ModuleType.EXPANSION_HUB, ConfigMaker.DeviceType.Servo,0);
 
     static boolean isEnabled = true;
     private ConfigRegistrar() {

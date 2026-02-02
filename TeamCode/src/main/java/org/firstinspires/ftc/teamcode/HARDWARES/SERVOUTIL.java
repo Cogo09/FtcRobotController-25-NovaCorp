@@ -20,6 +20,10 @@ public class SERVOUTIL {
     public static double leftscooperup = 0;
     public static double leftscooperdown = 62.5;
 
+    public static double safetyon = 100;
+
+    public static double safetyoff = 0;
+
     public static double bootkickerup = 150;
     public static double bootkickerdown = 0;
 }

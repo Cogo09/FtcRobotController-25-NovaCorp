@@ -23,8 +23,8 @@ public class flytune extends LinearOpMode {
 
     @Override
     public void runOpMode() {
-        gunmotorL = hardwareMap.get(DcMotorEx.class, "gunmotorL");
-        gunmotorR = hardwareMap.get(DcMotorEx.class, "gunmotorR");
+        gunmotorL = hardwareMap.get(DcMotorEx.class, "shooterL");
+        gunmotorR = hardwareMap.get(DcMotorEx.class, "shooterR");
         gunmotorL.setDirection(DcMotorSimple.Direction.FORWARD);
         gunmotorL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         gunmotorR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
