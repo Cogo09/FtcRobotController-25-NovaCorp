@@ -18,8 +18,8 @@ import java.util.List;
 public class PowerSUB {
     private DcMotor intakeR;
     private DcMotor intakeL;
-    private DcMotorEx shooterR;
-    private DcMotorEx shooterL;
+    private DcMotor shooterR;
+    private DcMotor shooterL;
 
     public enum gunSTATE {ON, OFF, EXTRA, IDLE}
 //!help
@@ -61,8 +61,8 @@ public class PowerSUB {
         shooterL.setDirection(DcMotorSimple.Direction.FORWARD);
         shooterR.setDirection(DcMotorSimple.Direction.REVERSE);
         PIDFCoefficients pidfCoefficients = new PIDFCoefficients(FlyUTIL.p, 0, 0, FlyUTIL.f);
-        shooterL.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, pidfCoefficients);
-        shooterR.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, pidfCoefficients);
+        shooterL.setPIDFCoefficients(DcMotorEx.RunMode.RUN_USING_ENCODER, pidfCoefficients);
+        shooterR.setPIDFCoefficients(DcMotorEx.RunMode.RUN_USING_ENCODER, pidfCoefficients);
 
     }
 

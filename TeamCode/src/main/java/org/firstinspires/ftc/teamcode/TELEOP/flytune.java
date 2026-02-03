@@ -12,8 +12,8 @@ import org.firstinspires.ftc.teamcode.UTILITIES.FlyUTIL;
 
 @TeleOp(name = "flytune")
 public class flytune extends LinearOpMode {
-    public DcMotorEx gunmotorL;
-    public DcMotorEx gunmotorR;
+    public DcMotorEx shooterL;
+    public DcMotorEx shooterR;
 
     public enum Velocity {High, Low}
 
@@ -23,15 +23,15 @@ public class flytune extends LinearOpMode {
 
     @Override
     public void runOpMode() {
-        gunmotorL = hardwareMap.get(DcMotorEx.class, "shooterL");
-        gunmotorR = hardwareMap.get(DcMotorEx.class, "shooterR");
-        gunmotorL.setDirection(DcMotorSimple.Direction.FORWARD);
-        gunmotorL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        gunmotorR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        gunmotorR.setDirection(DcMotorSimple.Direction.REVERSE);
+        shooterL = hardwareMap.get(DcMotorEx.class, "shooterL");
+        shooterR = hardwareMap.get(DcMotorEx.class, "shooterR");
+        shooterL.setDirection(DcMotorSimple.Direction.FORWARD);
+        shooterL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        shooterR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        shooterR.setDirection(DcMotorSimple.Direction.REVERSE);
         PIDFCoefficients pidfCoefficients = new PIDFCoefficients(FlyUTIL.p, 0, 0, FlyUTIL.f);
-        gunmotorL.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, pidfCoefficients);
-        gunmotorR.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, pidfCoefficients);
+        shooterL.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, pidfCoefficients);
+        shooterR.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, pidfCoefficients);
 
         waitForStart();
         while (opModeIsActive()) {
@@ -43,16 +43,16 @@ public class flytune extends LinearOpMode {
                 currenttargetvelo = FlyUTIL.highvelo;
             }
 
-            PIDFCoefficients pidfCoefficients2 = new PIDFCoefficients(FlyUTIL.p,0,0,FlyUTIL.f);
-            gunmotorL.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER,pidfCoefficients2);
-            gunmotorL.setVelocity(currenttargetvelo);
-            gunmotorR.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER,pidfCoefficients2);
-            gunmotorR.setVelocity(currenttargetvelo);
+            PIDFCoefficients pidfCoefficients2 = new PIDFCoefficients(FlyUTIL.p, 0, 0, FlyUTIL.f);
+            shooterL.setPIDFCoefficients(DcMotorEx.RunMode.RUN_USING_ENCODER, pidfCoefficients2);
+            shooterL.setVelocity(currenttargetvelo);
+            shooterR.setPIDFCoefficients(DcMotorEx.RunMode.RUN_USING_ENCODER, pidfCoefficients2);
+            shooterR.setVelocity(currenttargetvelo);
 
-            double currentVelo = gunmotorL.getVelocity();
-            telemetry.addData("targetvelo",currenttargetvelo);
-            telemetry.addData("currentVelo",currentVelo);
-            telemetry.addData("current Velo",currentVelo);
+            double currentVelo = shooterL.getVelocity();
+            telemetry.addData("targetvelo", currenttargetvelo);
+            telemetry.addData("currentVelo", currentVelo);
+            telemetry.addData("current Velo", currentVelo);
             telemetry.update();
         }
     }

@@ -70,9 +70,8 @@ public class HARDWARECONFIG {
 
     double color = 0;
 
-    private VisionPortal visionPortal;
-    private AprilTagProcessor aprilTag;
-    private RevColorSensorV3 colorSensor;
+    //private VisionPortal visionPortal;
+    //private AprilTagProcessor aprilTag;
     private InitMovementController imc = null;
 
     ElapsedTime elapsedTime = null;
@@ -98,14 +97,13 @@ public class HARDWARECONFIG {
         backRightMotor = hwmap.dcMotor.get("backRightMotor");
 
         dash = FtcDashboard.getInstance();
-        colorSensor = hwmap.get(RevColorSensorV3.class,"colorsensor");
 
 //        gunmotorR.setDirection(DcMotorSimple.Direction.REVERSE);
 //        gunmotorL.setDirection(DcMotorSimple.Direction.FORWARD);
 
         drive = new MecanumDrive(hwmap, (Pose2d) blackboard.getOrDefault(currentpose, new Pose2d(0, 0, 0)));
 
-        t = Turn(1.7);
+       // t = Turn(1.7);
 //         limelight = hwmap.get(Limelight3A.class, "limelight");
 //        backLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         frontLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -116,51 +114,51 @@ public class HARDWARECONFIG {
 
 
 
-        aprilTag = new AprilTagProcessor.Builder()
-
-                // The following default settings are available to un-comment and edit as needed.
-                .setDrawAxes(true)
-                .setDrawCubeProjection(false)
-                .setDrawTagOutline(true)
-                .setTagFamily(AprilTagProcessor.TagFamily.TAG_36h11)
-                .setTagLibrary(AprilTagGameDatabase.getDecodeTagLibrary())
-                .setOutputUnits(DistanceUnit.INCH, AngleUnit.RADIANS)
-
-                // == CAMERA CALIBRATION ==
-                // If you do not manually specify calibration parameters, the SDK will attempt
-                // to load a predefined calibration for your camera.
-                .setLensIntrinsics(572.066, 572.066, 327.923, 257.789)
-                // ... these parameters are fx, fy, cx, cy.
-
-
-                .build();
-        VisionPortal.Builder builder = new VisionPortal.Builder();
+//        aprilTag = new AprilTagProcessor.Builder()
+//
+//                // The following default settings are available to un-comment and edit as needed.
+//                .setDrawAxes(true)
+//                .setDrawCubeProjection(false)
+//                .setDrawTagOutline(true)
+//                .setTagFamily(AprilTagProcessor.TagFamily.TAG_36h11)
+//                .setTagLibrary(AprilTagGameDatabase.getDecodeTagLibrary())
+//                .setOutputUnits(DistanceUnit.INCH, AngleUnit.RADIANS)
+//
+//                // == CAMERA CALIBRATION ==
+//                // If you do not manually specify calibration parameters, the SDK will attempt
+//                // to load a predefined calibration for your camera.
+//                .setLensIntrinsics(572.066, 572.066, 327.923, 257.789)
+//                // ... these parameters are fx, fy, cx, cy.
+//
+//
+//                .build();
+        //VisionPortal.Builder builder = new VisionPortal.Builder();
 
         // Set the camera (webcam vs. built-in RC phone camera).
-        builder.setCamera(hwmap.get(WebcamName.class, "Webcam 1"));
-        builder.addProcessor(aprilTag);
+        //builder.setCamera(hwmap.get(WebcamName.class, "Webcam 1"));
+        //builder.addProcessor(aprilTag);
 
         // Build the Vision Portal, using the above settings.
-        visionPortal = builder.build();
-        FtcDashboard.getInstance().startCameraStream(visionPortal, 60);
+       // visionPortal = builder.build();
+        //FtcDashboard.getInstance().startCameraStream(visionPortal, 60);
 
         elapsedTime = new ElapsedTime();
     }
 
-    public int getrandomization() {
-        //apriltags need to find the green 1 for first pos 2 for second pos 3 for third.
-        //21,22,23
-        List<AprilTagDetection> currentDetections = aprilTag.getDetections();
-
-        for (AprilTagDetection detection : currentDetections) {
-            if (detection.id >= 21 && detection.id <= 23) {
-                return detection.id - 20;
-
-            }
-
-        }
-        return 0;
-    }
+//    public int getrandomization() {
+//        //apriltags need to find the green 1 for first pos 2 for second pos 3 for third.
+//        //21,22,23
+//        List<AprilTagDetection> currentDetections = aprilTag.getDetections();
+//
+//        for (AprilTagDetection detection : currentDetections) {
+//            if (detection.id >= 21 && detection.id <= 23) {
+//                return detection.id - 20;
+//
+//            }
+//
+//        }
+//        return 0;
+//    }
 
     public static String currentpose = "currentpose";
 
@@ -207,66 +205,43 @@ public class HARDWARECONFIG {
 //            greenLed2.off();
 //        }
 //    }
-    public void getDetectedColor (Telemetry telemetry){
-       NormalizedRGBA colors = colorSensor.getNormalizedColors();
-
-        float normpurple, normgreen, normred;
-        normgreen = colors.green * 100;
-        normpurple = colors.blue * 100;
-        normred = colors.red * 100;
-        boolean isgreen = false;
-        float max = normpurple;
-        if (normgreen > max){
-            max = normgreen;
-            isgreen = true;
-        }
-
-        telemetry.addData("green",normgreen);
-        telemetry.addData("purple",normpurple);
-        telemetry.addData("red",normred);
-        if (max > 1){
-            telemetry.addData("max", max);
-            telemetry.addData("green",isgreen);
-        }
 
 
-    }
 
-
-    public Action Turn(double angle) {
-        Scribe.getInstance().logData("here");
-        return drive.actionBuilder(drive.localizer.getPose())
-                .turnTo(angle).build();
-    }
+//    public Action Turn(double angle) {
+//        Scribe.getInstance().logData("here");
+//        return drive.actionBuilder(drive.localizer.getPose())
+//                .turnTo(angle).build();
+//    }
 
     Action runningaction = null;
 
-    public void lockit() {
-        TelemetryPacket p = new TelemetryPacket();
-        double angle = getheadingfromAT();
-
-
-//        Scribe.getInstance().logData(angle);
-        if (angle != 0) {
-            Action t = Turn(angle);
-
-
-            if (runningaction != null) {
-//                runningaction.preview(p.fieldOverlay());
-                Actions.runBlocking(runningaction);
-                runningaction = null;
-//                runningaction.run(p);
-//                if (!runningaction.run(p)) {
-//                    Scribe.getInstance().logData("true");
-//                    runningaction = null;
-//                }
-
-            } else {
-                runningaction = t;
-            }
-            dash.sendTelemetryPacket(p);
-        }
-    }
+//    public void lockit() {
+//        TelemetryPacket p = new TelemetryPacket();
+//        double angle = getheadingfromAT();
+//
+//
+////        Scribe.getInstance().logData(angle);
+//        if (angle != 0) {
+//            Action t = Turn(angle);
+//
+//
+//            if (runningaction != null) {
+////                runningaction.preview(p.fieldOverlay());
+//                Actions.runBlocking(runningaction);
+//                runningaction = null;
+////                runningaction.run(p);
+////                if (!runningaction.run(p)) {
+////                    Scribe.getInstance().logData("true");
+////                    runningaction = null;
+////                }
+//
+//            } else {
+//                runningaction = t;
+//            }
+//            dash.sendTelemetryPacket(p);
+//        }
+//    }
 
 //    public double getrangefromAT() {
 //        List<AprilTagDetection> currentDetections = aprilTag.getDetections();
@@ -300,21 +275,21 @@ public class HARDWARECONFIG {
 //    }
 
 
-    public double getheadingfromAT() {
-        List<AprilTagDetection> currentDetections = aprilTag.getDetections();
-
-        for (AprilTagDetection detection : currentDetections) {
-            if (detection.id == 20 || detection.id == 24) {
-                if (detection.id == 20){
-                    return Math.PI/4;
-                }else{
-                    return (7*Math.PI)/4;
-                }
-            }
-
-        }
-        return 0;
-    }
+//    public double getheadingfromAT() {
+//        List<AprilTagDetection> currentDetections = aprilTag.getDetections();
+//
+//        for (AprilTagDetection detection : currentDetections) {
+//            if (detection.id == 20 || detection.id == 24) {
+//                if (detection.id == 20){
+//                    return Math.PI/4;
+//                }else{
+//                    return (7*Math.PI)/4;
+//                }
+//            }
+//
+//        }
+//        return 0;
+//    }
 
 
 
@@ -334,7 +309,7 @@ public class HARDWARECONFIG {
 
     public void dobulk() {//
         imc.checkHasMovedOnInit();
-        heading = getheadingfromAT();
+        //heading = getheadingfromAT();
        // distance = getrangefromAT();
         double y = -opMode.gamepad1.left_stick_y; // Remember, Y stick value is reversed
         double x = opMode.gamepad1.left_stick_x * 1.1; // Counteract imperfect strafing
@@ -378,7 +353,7 @@ public class HARDWARECONFIG {
         } else {
             indicator = 0;
         }
-        getDetectedColor(telemetry);
+
 
 
 //        if (indicator == 1) {
@@ -448,7 +423,7 @@ public class HARDWARECONFIG {
         backRightMotor.setPower(backRightPower);
 
         if (imc.hasMovedOnInit()){
-            servosub.update();
+            //servosub.update();
             powersub.update();
         }
         //armSub.update();

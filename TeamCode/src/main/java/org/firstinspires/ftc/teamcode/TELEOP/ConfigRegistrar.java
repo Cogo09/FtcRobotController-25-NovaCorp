@@ -6,28 +6,29 @@ import com.qualcomm.robotcore.eventloop.opmode.OpModeRegistrar;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 import org.firstinspires.ftc.robotcore.internal.opmode.OpModeMeta;
-
-
 import org.gentrifiedApps.gentrifiedAppsUtil.classes.drive.drift.DriftTunerOpMode;
-import org.gentrifiedApps.gentrifiedAppsUtil.config.ConfigMaker;
 import org.gentrifiedApps.gentrifiedAppsUtil.config.ConfigCreator;
+import org.gentrifiedApps.gentrifiedAppsUtil.config.ConfigMaker;
 import org.gentrifiedApps.gentrifiedAppsUtil.heatseeker.Driver;
 
 public final class ConfigRegistrar {
 
     static ConfigMaker config = new ConfigMaker("Das ROBOTO")
-            .addModule(ConfigMaker.ModuleType.EXPANSION_HUB, "Expansion Hub 2",2)
+            .addModule(ConfigMaker.ModuleType.EXPANSION_HUB, "Expansion Hub 2", 2)
             .addMotor("frontLeftMotor", ConfigMaker.ModuleType.CONTROL_HUB, ConfigMaker.MotorType.goBILDA5201SeriesMotor, 0)
             .addMotor("backLeftMotor", ConfigMaker.ModuleType.CONTROL_HUB, ConfigMaker.MotorType.goBILDA5201SeriesMotor, 1)
             .addMotor("frontRightMotor", ConfigMaker.ModuleType.CONTROL_HUB, ConfigMaker.MotorType.goBILDA5201SeriesMotor, 2)
             .addMotor("backRightMotor", ConfigMaker.ModuleType.CONTROL_HUB, ConfigMaker.MotorType.goBILDA5201SeriesMotor, 3)
-            .addMotor("intakeL", ConfigMaker.ModuleType.EXPANSION_HUB, ConfigMaker.MotorType.RevRoboticsCoreHexMotor,0)
-            .addMotor("intakeR",ConfigMaker.ModuleType.EXPANSION_HUB, ConfigMaker.MotorType.RevRoboticsCoreHexMotor,1)
-            .addMotor("shooterL",ConfigMaker.ModuleType.EXPANSION_HUB,ConfigMaker.MotorType.RevRoboticsCoreHexMotor,2)
-            .addMotor("shooterR",ConfigMaker.ModuleType.EXPANSION_HUB,ConfigMaker.MotorType.RevRoboticsCoreHexMotor,3)
-            .addDevice("safetyswitch", ConfigMaker.ModuleType.EXPANSION_HUB, ConfigMaker.DeviceType.Servo,0);
+            .addMotor("intakeL", ConfigMaker.ModuleType.EXPANSION_HUB, ConfigMaker.MotorType.RevRoboticsCoreHexMotor, 0)
+            .addMotor("intakeR", ConfigMaker.ModuleType.EXPANSION_HUB, ConfigMaker.MotorType.RevRoboticsCoreHexMotor, 1)
+            .addMotor("shooterL", ConfigMaker.ModuleType.EXPANSION_HUB, ConfigMaker.MotorType.goBILDA5201SeriesMotor, 2)
+            .addMotor("shooterR", ConfigMaker.ModuleType.EXPANSION_HUB, ConfigMaker.MotorType.goBILDA5201SeriesMotor, 3)
+            .addDevice("safetyswitch", ConfigMaker.ModuleType.EXPANSION_HUB, ConfigMaker.DeviceType.Servo, 0)
+            .addDevice("imu", ConfigMaker.ModuleType.EXPANSION_HUB, ConfigMaker.DeviceType.AdafruitBNO055IMU, 0);
+
 
     static boolean isEnabled = true;
+
     private ConfigRegistrar() {
     }
 
@@ -38,12 +39,13 @@ public final class ConfigRegistrar {
                 .setFlavor(OpModeMeta.Flavor.TELEOP)
                 .build();
     }
-//!hihihimm
+
+    //!hihihimm
     @OpModeRegistrar
     public static void register(OpModeManager manager) {
         if (!isEnabled) return;
         manager.register(metaForClass(ConfigCreator.class), new ConfigCreator(config));
-        manager.register(metaForClass(DriftTunerOpMode.class), new DriftTunerOpMode(new Driver("frontLeftMotor", "frontRightMotor", "backLeftMotor", "backRightMotor", DcMotorSimple.Direction.REVERSE, DcMotorSimple.Direction.FORWARD, DcMotorSimple.Direction.FORWARD, DcMotorSimple.Direction.FORWARD),3));
+        manager.register(metaForClass(DriftTunerOpMode.class), new DriftTunerOpMode(new Driver("frontLeftMotor", "frontRightMotor", "backLeftMotor", "backRightMotor", DcMotorSimple.Direction.REVERSE, DcMotorSimple.Direction.FORWARD, DcMotorSimple.Direction.FORWARD, DcMotorSimple.Direction.FORWARD), 3));
 
     }
 }
