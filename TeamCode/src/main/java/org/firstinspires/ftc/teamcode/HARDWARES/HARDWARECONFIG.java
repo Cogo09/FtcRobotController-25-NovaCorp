@@ -46,11 +46,7 @@ public class HARDWARECONFIG {
     DcMotor backLeftMotor = null;
     DcMotor frontRightMotor = null;
     DcMotor backRightMotor = null;
-    // Limelight3A limelight = null;
-//    DcMotor gunmotorR = null;
-//    DcMotor gunmotorL = null;
-//    DcMotor intakeR = null;
-//    DcMotor intakeL = null;
+
     double heading = 0;
     double distance = 0;
     Pose2d startPose = null;
@@ -60,12 +56,7 @@ public class HARDWARECONFIG {
     double x = 0;
     double y = 0;
     double indicator = 0;
-//    private LED redLed;
-//    private LED greenLed;
-//    private LED redLed1;
-//    private LED greenLed1;
-//    private LED redLed2;
-//    private LED greenLed2;
+
 
 
     double color = 0;
@@ -115,147 +106,20 @@ public class HARDWARECONFIG {
 
 
 
-//        aprilTag = new AprilTagProcessor.Builder()
 //
-//                // The following default settings are available to un-comment and edit as needed.
-//                .setDrawAxes(true)
-//                .setDrawCubeProjection(false)
-//                .setDrawTagOutline(true)
-//                .setTagFamily(AprilTagProcessor.TagFamily.TAG_36h11)
-//                .setTagLibrary(AprilTagGameDatabase.getDecodeTagLibrary())
-//                .setOutputUnits(DistanceUnit.INCH, AngleUnit.RADIANS)
-//
-//                // == CAMERA CALIBRATION ==
-//                // If you do not manually specify calibration parameters, the SDK will attempt
-//                // to load a predefined calibration for your camera.
-//                .setLensIntrinsics(572.066, 572.066, 327.923, 257.789)
-//                // ... these parameters are fx, fy, cx, cy.
-//
-//
-//                .build();
-        //VisionPortal.Builder builder = new VisionPortal.Builder();
-
-        // Set the camera (webcam vs. built-in RC phone camera).
-        //builder.setCamera(hwmap.get(WebcamName.class, "Webcam 1"));
-        //builder.addProcessor(aprilTag);
-
-        // Build the Vision Portal, using the above settings.
-       // visionPortal = builder.build();
-        //FtcDashboard.getInstance().startCameraStream(visionPortal, 60);
 
         elapsedTime = new ElapsedTime();
     }
 
-//    public int getrandomization() {
-//        //apriltags need to find the green 1 for first pos 2 for second pos 3 for third.
-//        //21,22,23
-//        List<AprilTagDetection> currentDetections = aprilTag.getDetections();
-//
-//        for (AprilTagDetection detection : currentDetections) {
-//            if (detection.id >= 21 && detection.id <= 23) {
-//                return detection.id - 20;
-//
-//            }
-//
-//        }
-//        return 0;
-//    }
+
 
     public static String currentpose = "currentpose";
 
-//    public void SetRedLED(boolean isOn) {
-//        if (isOn) {
-//            redLed.on();
-//        } else {
-//            redLed.off();
-//        }
-//    }
-//    public void SetRedLED1(boolean isOn) {
-//        if (isOn) {
-//            redLed1.on();
-//        } else {
-//            redLed1.off();
-//        }
-//    }
-//    public void SetRedLED2(boolean isOn) {
-//        if (isOn) {
-//            redLed2.on();
-//        } else {
-//            redLed2.off();
-//        }
-//    }
-//
-//    public void SetGreenLED(boolean isOn) {
-//        if (isOn) {
-//            greenLed.on();
-//        } else {
-//            greenLed.off();
-//        }
-//    }
-//    public void SetGreenLED1(boolean isOn) {
-//        if (isOn) {
-//            greenLed1.on();
-//        } else {
-//            greenLed1.off();
-//        }
-//    }
-//    public void SetGreenLED2(boolean isOn) {
-//        if (isOn) {
-//            greenLed2.on();
-//        } else {
-//            greenLed2.off();
-//        }
-//    }
 
-
-
-//    public Action Turn(double angle) {
-//        Scribe.getInstance().logData("here");
-//        return drive.actionBuilder(drive.localizer.getPose())
-//                .turnTo(angle).build();
-//    }
 
     Action runningaction = null;
 
-//    public void lockit() {
-//        TelemetryPacket p = new TelemetryPacket();
-//        double angle = getheadingfromAT();
-//
-//
-////        Scribe.getInstance().logData(angle);
-//        if (angle != 0) {
-//            Action t = Turn(angle);
-//
-//
-//            if (runningaction != null) {
-////                runningaction.preview(p.fieldOverlay());
-//                Actions.runBlocking(runningaction);
-//                runningaction = null;
-////                runningaction.run(p);
-////                if (!runningaction.run(p)) {
-////                    Scribe.getInstance().logData("true");
-////                    runningaction = null;
-////                }
-//
-//            } else {
-//                runningaction = t;
-//            }
-//            dash.sendTelemetryPacket(p);
-//        }
-//    }
 
-//    public double getrangefromAT() {
-//        List<AprilTagDetection> currentDetections = aprilTag.getDetections();
-//
-//        for (AprilTagDetection detection : currentDetections) {
-//            if (detection.id == 20 || detection.id == 24) {
-//                return detection.ftcPose.range;
-//            }
-//
-//        }
-//        return -1;
-//
-//    }
 
     public void indicatormath() {
         if (heading <= 0) {
@@ -265,32 +129,7 @@ public class HARDWARECONFIG {
         }
     }
 
-//    public void lighton() {
-//        if (indicator > 0) {
-//            SetGreenLED(true);
-//            SetRedLED(false);
-//        } else if (indicator < 1) {
-//            SetGreenLED(false);
-//            SetRedLED(true);
-//        }
-//    }
 
-
-//    public double getheadingfromAT() {
-//        List<AprilTagDetection> currentDetections = aprilTag.getDetections();
-//
-//        for (AprilTagDetection detection : currentDetections) {
-//            if (detection.id == 20 || detection.id == 24) {
-//                if (detection.id == 20){
-//                    return Math.PI/4;
-//                }else{
-//                    return (7*Math.PI)/4;
-//                }
-//            }
-//
-//        }
-//        return 0;
-//    }
 
 
 
@@ -357,13 +196,7 @@ public class HARDWARECONFIG {
 
 
 
-//        if (indicator == 1) {
-//            SetGreenLED(false);
-//            SetRedLED(true);
-//        } else if (indicator == 0) {
-//            SetGreenLED(true);
-//            SetRedLED(false);
-//        }
+
 
 
 
@@ -398,20 +231,7 @@ public class HARDWARECONFIG {
 
 
 
-//        if (opMode.gamepad2.x){
-//            servosub.lscoopdown();
-//        }else {
-//            servosub.lscoopup();
-//        }
-//        if (opMode.gamepad2.b){
-//            servosub.rscoopdown();
-//        }else {
-//            servosub.rscoopup();
-//        }
-//        if (opMode.gamepad2.a){
-//            servosub.rscoopup();
-//            servosub.lscoopup();
-//        }
+
 
 
 

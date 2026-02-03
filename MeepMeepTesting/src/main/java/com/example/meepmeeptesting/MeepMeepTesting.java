@@ -164,8 +164,6 @@ public class MeepMeepTesting {
 
                 .splineToLinearHeading(new Pose2d(-15, -10, Math.toRadians(220)), 1)
                 .splineToLinearHeading(new Pose2d(15, -10, Math.toRadians(270)), 2)
-
-
                 .lineToYConstantHeading(-40)
 
 //                .splineToLinearHeading(new Pose2d(-15, -10, Math.toRadians(220)), 2)
