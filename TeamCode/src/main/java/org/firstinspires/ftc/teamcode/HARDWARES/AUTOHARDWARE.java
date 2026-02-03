@@ -114,7 +114,14 @@ public class AUTOHARDWARE extends HARDWARECONFIG {
                                 endAction()
                         ),
                         new SequentialAction(
+                                powersub.gunAction(List.of(() -> powersub.intakeon())),
+                                servosub.servoAction(List.of(() -> servosub.Safetyoff())),
+                                endAction()
+                        ),
+                        new SequentialAction(
                                 powersub.gunAction(List.of(() -> powersub.gunoff())),
+                                powersub.gunAction(List.of(() -> powersub.intakeoff())),
+                                servosub.servoAction(List.of(() -> servosub.SafetyON())),
                                 endAction()
                         ),
                         new SequentialAction(
@@ -123,8 +130,26 @@ public class AUTOHARDWARE extends HARDWARECONFIG {
                                         .turnTo(Math.toRadians(270))
                                         .strafeToLinearHeading(new Vector2d(-14, -10), Math.toRadians(270))
                                         .setTangent(1.6)
+                                        .build(),
+                                endAction()
+                        ),
+                        new SequentialAction(
+                                powersub.gunAction(List.of(() -> powersub.intakeon())),
+                                endAction()
+                        ),
+                        new SequentialAction(
+                                drive.actionBuilder(lastPose)
                                         .lineToYLinearHeading(-40, Math.toRadians(270))
                                         .splineToLinearHeading(new Pose2d(-14, -10, Math.toRadians(225)), 0.5)
+                                        .build(),
+                                endAction()
+                                ),
+                        new SequentialAction(
+                                servosub.servoAction(List.of(() -> servosub.Safetyoff())),
+                                powersub.gunAction(List.of(()-> powersub.power()))
+                        ),
+                        new SequentialAction(
+                                drive.actionBuilder(lastPose)
                                         .splineToLinearHeading(new Pose2d(12, -25, Math.toRadians(270)), 1)
                                         .setTangent(1.55)
                                         .lineToYLinearHeading(-40, Math.toRadians(270))
@@ -138,6 +163,7 @@ public class AUTOHARDWARE extends HARDWARECONFIG {
                                         .build(),
                                 endAction()
                         )
+
                 )
         );
     }
