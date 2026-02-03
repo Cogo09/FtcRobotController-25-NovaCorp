@@ -18,8 +18,8 @@ import java.util.List;
 public class PowerSUB {
     private DcMotor intakeR;
     private DcMotor intakeL;
-    private DcMotor shooterR;
-    private DcMotor shooterL;
+    private DcMotorEx shooterR;
+    private DcMotorEx shooterL;
 
     public enum gunSTATE {ON, OFF, EXTRA, IDLE}
 //!help

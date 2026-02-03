@@ -80,6 +80,7 @@ public class HARDWARECONFIG {
         initrobot(hwmap, om, auto);
 
         powersub = new PowerSUB(hwmap);
+        servosub = new SERVOSUB(hwmap);
 
     }
 
@@ -423,7 +424,7 @@ public class HARDWARECONFIG {
         backRightMotor.setPower(backRightPower);
 
         if (imc.hasMovedOnInit()){
-            //servosub.update();
+            servosub.update();
             powersub.update();
         }
         //armSub.update();
