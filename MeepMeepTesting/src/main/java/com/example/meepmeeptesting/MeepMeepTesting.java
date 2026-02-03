@@ -157,14 +157,24 @@ public class MeepMeepTesting {
                 .waitSeconds(2)
                 .build());
         //!RED SHOOT 12 clear
-        myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(-52, -50, Math.toRadians(220)))
-                .lineToXConstantHeading(-15)
+        myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(-52, -50, Math.toRadians(225)))
+                .lineToXConstantHeading(-14)
                 .turnTo(Math.toRadians(270))
-                .lineToY(-40)
+                .strafeToLinearHeading(new Vector2d(-14, -10), Math.toRadians(270))
+                .setTangent(1.6)
+                .lineToYLinearHeading(-40, Math.toRadians(270))
+                .splineToLinearHeading(new Pose2d(-14, -10, Math.toRadians(225)), 0.5)
+                .splineToLinearHeading(new Pose2d(12, -25, Math.toRadians(270)), 1)
+                .setTangent(1.55)
+                .lineToYLinearHeading(-40, Math.toRadians(270))
+                .splineToLinearHeading(new Pose2d(-14, -10, Math.toRadians(225)), 1)
+                .strafeToLinearHeading(new Vector2d(0, -52), Math.toRadians(180))
+                .waitSeconds(3)
+                .strafeToLinearHeading(new Vector2d(35, -20), Math.toRadians(270))
+                .setTangent(1.55)
+                .lineToYLinearHeading(-40, Math.toRadians(270))
+                .splineToLinearHeading(new Pose2d(-14, -10, Math.toRadians(225)), 1)
 
-                .splineToLinearHeading(new Pose2d(-15, -10, Math.toRadians(220)), 1)
-                .splineToLinearHeading(new Pose2d(15, -10, Math.toRadians(270)), 2)
-                .lineToYConstantHeading(-40)
 
 //                .splineToLinearHeading(new Pose2d(-15, -10, Math.toRadians(220)), 2)
 
@@ -172,6 +182,10 @@ public class MeepMeepTesting {
                 //preloads
 
                 .build());
+        myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(-52, -50, Math.toRadians(225)))
+
+
+                        .build());
 
 
         meepMeep.setBackground(MeepMeep.Background.FIELD_DECODE_OFFICIAL)

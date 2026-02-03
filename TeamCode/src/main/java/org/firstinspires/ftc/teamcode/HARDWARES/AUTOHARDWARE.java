@@ -6,7 +6,7 @@ import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
 import com.acmerobotics.roadrunner.Action;
 import com.acmerobotics.roadrunner.Pose2d;
 import com.acmerobotics.roadrunner.SequentialAction;
-import com.acmerobotics.roadrunner.SleepAction;
+import com.acmerobotics.roadrunner.Vector2d;
 import com.acmerobotics.roadrunner.ftc.Actions;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -99,7 +99,50 @@ public class AUTOHARDWARE extends HARDWARECONFIG {
         );
     }
 
-    public void newauto(){
+    public void twelveballtheorecical() {
+        drivefinished = true;
+        Actions.runBlocking(
+                new SequentialAction(
+                        new SequentialAction(
+                                powersub.gunAction(List.of(() -> powersub.power())),
+                                endAction()
+                        ),
+                        new SequentialAction(
+                                drive.actionBuilder(startPose)
+                                        .lineToXConstantHeading(-14)
+                                        .build(),
+                                endAction()
+                        ),
+                        new SequentialAction(
+                                powersub.gunAction(List.of(() -> powersub.gunoff())),
+                                endAction()
+                        ),
+                        new SequentialAction(
+                                drive.actionBuilder(lastPose)
+
+                                        .turnTo(Math.toRadians(270))
+                                        .strafeToLinearHeading(new Vector2d(-14, -10), Math.toRadians(270))
+                                        .setTangent(1.6)
+                                        .lineToYLinearHeading(-40, Math.toRadians(270))
+                                        .splineToLinearHeading(new Pose2d(-14, -10, Math.toRadians(225)), 0.5)
+                                        .splineToLinearHeading(new Pose2d(12, -25, Math.toRadians(270)), 1)
+                                        .setTangent(1.55)
+                                        .lineToYLinearHeading(-40, Math.toRadians(270))
+                                        .splineToLinearHeading(new Pose2d(-14, -10, Math.toRadians(225)), 1)
+                                        .strafeToLinearHeading(new Vector2d(0, -52), Math.toRadians(180))
+                                        .waitSeconds(3)
+                                        .strafeToLinearHeading(new Vector2d(35, -20), Math.toRadians(270))
+                                        .setTangent(1.55)
+                                        .lineToYLinearHeading(-40, Math.toRadians(270))
+                                        .splineToLinearHeading(new Pose2d(-14, -10, Math.toRadians(225)), 1)
+                                        .build(),
+                                endAction()
+                        )
+                )
+        );
+    }
+
+    public void newauto() {
         drivefinished = true;
         Actions.runBlocking(
                 new SequentialAction(
