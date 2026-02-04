@@ -207,6 +207,11 @@ public class HARDWARECONFIG {
         } else {
             powersub.intakeoff();
         }
+        if (opMode.gamepad2.left_bumper){
+            powersub.intakeon();
+        }else if (opMode.gamepad2.right_bumper) {
+            powersub.intakeon();
+        }
 
 
 
@@ -214,10 +219,10 @@ public class HARDWARECONFIG {
 
         if (opMode.gamepad2.left_trigger > 0) {
             powersub.extrapower();
-            powersub.intakeon();
+
         }else if (opMode.gamepad2.right_trigger > 0){
             powersub.power();
-            powersub.intakeon();
+
         }else {
             powersub.gunidle();
         }

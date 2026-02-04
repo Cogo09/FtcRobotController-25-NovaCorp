@@ -88,14 +88,14 @@ public class PowerSUB {
 
         switch (gunStateVar) {
             case ON:
-                shooterL.setVelocity(0.9*FlyUTIL.highvelo);
+                shooterL.setVelocity(0.8*FlyUTIL.highvelo);
 
-                shooterR.setVelocity(0.9*FlyUTIL.highvelo);
+                shooterR.setVelocity(0.8*FlyUTIL.highvelo);
                 break;
             case OFF:
-                shooterL.setVelocity(0.7);
+                shooterL.setVelocity(0.0);
 
-                shooterR.setVelocity(0.7);
+                shooterR.setVelocity(0.0);
                 break;
 
             case EXTRA:
