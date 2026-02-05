@@ -625,7 +625,7 @@ public class AUTOHARDWARE extends HARDWARECONFIG {
                                         .turnTo(Math.toRadians(91))
                                         .lineToY(52)
                                         .turnTo(Math.toRadians(0))
-                                        .strafeToLinearHeading(new Vector2d(-45, 56), Math.toRadians(0))
+                                        .strafeToLinearHeading(new Vector2d(45, 61), Math.toRadians(0))
                                         .turnTo(Math.toRadians(1))
                                         .build(),
                                 endAction()
@@ -673,7 +673,7 @@ public class AUTOHARDWARE extends HARDWARECONFIG {
                         ),
                         new SequentialAction(
                                 drive.actionBuilder(lastPose)
-                                        .lineToX(-52)
+                                        .lineToY(52)
                                         .build(),
                                 endAction()
                         ),
