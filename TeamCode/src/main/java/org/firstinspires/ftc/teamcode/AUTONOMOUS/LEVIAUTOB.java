@@ -10,7 +10,7 @@ import org.firstinspires.ftc.teamcode.HARDWARES.AUTOHARDWARE;
 
 
 @Autonomous
-public class launchlineautoblueclose extends LinearOpMode {
+public class LEVIAUTOB extends LinearOpMode {
     AUTOHARDWARE robot = null;
     ///
     ///
@@ -26,11 +26,11 @@ public class launchlineautoblueclose extends LinearOpMode {
     ///
     @Override//
     public void runOpMode() throws InterruptedException {
-        robot = new AUTOHARDWARE(this, hardwareMap, new Pose2d(-52,-50,Math.toRadians(220)));
+        robot = new AUTOHARDWARE(this, hardwareMap, new Pose2d(57,-20,Math.toRadians(180)));
         waitForStart();
         if (opModeIsActive()){
-            robot.newauto();
-            //robot.red18();
+            robot.LEVIAUTOB();
+
             blackboard.put(currentpose,robot.drive.localizer.getPose());
         }
     }

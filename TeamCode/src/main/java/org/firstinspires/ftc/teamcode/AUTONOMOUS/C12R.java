@@ -10,7 +10,7 @@ import org.firstinspires.ftc.teamcode.HARDWARES.AUTOHARDWARE;
 
 
 @Autonomous
-public class FarBLUEautonoball extends LinearOpMode {
+public class C12R extends LinearOpMode {
     AUTOHARDWARE robot = null;
     ///
     ///
@@ -26,12 +26,12 @@ public class FarBLUEautonoball extends LinearOpMode {
     ///
     @Override//
     public void runOpMode() throws InterruptedException {
-        robot = new AUTOHARDWARE(this, hardwareMap, new Pose2d(50,-15,Math.toRadians(180)));
+        robot = new AUTOHARDWARE(this, hardwareMap, new Pose2d(-52,-50,Math.toRadians(220)));
         waitForStart();
         if (opModeIsActive()){
-            robot.farbluenoball();
-            //robot.red18();
+            robot.PRERC12();
             blackboard.put(currentpose,robot.drive.localizer.getPose());
         }
     }
 }
+

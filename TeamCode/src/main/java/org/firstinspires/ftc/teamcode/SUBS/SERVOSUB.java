@@ -31,9 +31,6 @@ public class SERVOSUB {
         SafetyStateVar = SafetyState.OFF;
     }
 
-    public void LELEIDLE() {
-        SafetyStateVar = SafetyState.IDLE;
-    }
 
 
 

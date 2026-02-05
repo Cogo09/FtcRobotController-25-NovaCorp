@@ -182,10 +182,25 @@ public class MeepMeepTesting {
                 //preloads
 
                 .build());
-        myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(-52, -50, Math.toRadians(225)))
+        myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(-52, 50, Math.toRadians(145)))
+                .lineToXConstantHeading(-13)
+                .splineToLinearHeading(new Pose2d(-13, 27, Math.toRadians(90)), 0)
+                .turnTo(Math.toRadians(91))
+                .lineToY(50)
+                .splineToLinearHeading(new Pose2d(-13, 20, Math.toRadians(145)), 0)
+                .splineToLinearHeading(new Pose2d(13, 20, Math.toRadians(90)), 0)
+                .turnTo(Math.toRadians(91))
+                .lineToY(50)
+                .lineToY(48)
+                .splineToLinearHeading(new Pose2d(-13, 20, Math.toRadians(145)), 0)
+                .splineToLinearHeading(new Pose2d(35, 20, Math.toRadians(90)), 0)
+                .turnTo(Math.toRadians(91))
+                .lineToY(50)
+                .splineToLinearHeading(new Pose2d(-13, 20, Math.toRadians(145)), 0)
+                .splineToLinearHeading(new Pose2d(10, 20, Math.toRadians(180)), 0)
 
 
-                        .build());
+                .build());
 
 
         meepMeep.setBackground(MeepMeep.Background.FIELD_DECODE_OFFICIAL)

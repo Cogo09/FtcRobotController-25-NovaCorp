@@ -4,8 +4,10 @@ import androidx.annotation.NonNull;
 
 import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
 import com.acmerobotics.roadrunner.Action;
+import com.acmerobotics.roadrunner.ParallelAction;
 import com.acmerobotics.roadrunner.Pose2d;
 import com.acmerobotics.roadrunner.SequentialAction;
+import com.acmerobotics.roadrunner.SleepAction;
 import com.acmerobotics.roadrunner.Vector2d;
 import com.acmerobotics.roadrunner.ftc.Actions;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -85,102 +87,627 @@ public class AUTOHARDWARE extends HARDWARECONFIG {
     }
 
     //!help
-    public void farbluenoball() {
+    public void CLLB() {
+        drivefinished = true;
+        Actions.runBlocking(
+                new SequentialAction(
+                        drive.actionBuilder(startPose)
+                                .splineToLinearHeading(new Pose2d(-20, -45, Math.toRadians(180)), 1)
+                                .build(),
+                        endAction()
+                )
+        );
+    }
+
+    public void CLLR() {
+        drivefinished = true;
+        Actions.runBlocking(
+                new SequentialAction(
+                        drive.actionBuilder(startPose)
+                                .splineToLinearHeading(new Pose2d(-20, 45, Math.toRadians(180)), 1)
+                                .build(),
+                        endAction()
+                )
+        );
+    }
+
+    public void FLLR() {
+        drivefinished = true;
+        Actions.runBlocking(
+                new SequentialAction(
+                        drive.actionBuilder(startPose)
+                                .lineToX(30)
+                                .build(),
+                        endAction()
+                )
+        );
+    }
+
+    public void FLLB() {
+        drivefinished = true;
+        Actions.runBlocking(
+                new SequentialAction(
+                        drive.actionBuilder(startPose)
+                                .lineToX(30)
+                                .build(),
+                        endAction()
+                )
+        );
+    }
+
+
+//    public void twelveballtheorecical() {
+//        drivefinished = true;
+//        Actions.runBlocking(
+//                new SequentialAction(
+//                        new SequentialAction(
+//                                powersub.gunAction(List.of(() -> powersub.power())),
+//                                endAction()
+//                        ),
+//                        new SequentialAction(
+//                                drive.actionBuilder(startPose)
+//                                        .lineToXConstantHeading(-14)
+//                                        .build(),
+//                                endAction()
+//                        ),
+//                        new SequentialAction(
+//                                powersub.gunAction(List.of(() -> powersub.intakeon())),
+//                                servosub.servoAction(List.of(() -> servosub.Safetyoff())),
+//                                endAction()
+//                        ),
+//                        new SleepAction(1),
+//                        new SequentialAction(
+//                                powersub.gunAction(List.of(() -> powersub.gunoff())),
+//                                powersub.gunAction(List.of(() -> powersub.intakeoff())),
+//                                servosub.servoAction(List.of(() -> servosub.SafetyON())),
+//                                endAction()
+//                        ),
+//                        new SequentialAction(
+//                                drive.actionBuilder(lastPose)
+//
+//                                        .turnTo(Math.toRadians(270))
+//                                        .strafeToLinearHeading(new Vector2d(-14, -10), Math.toRadians(270))
+//                                        .setTangent(1.6)
+//                                        .build(),
+//                                endAction()
+//                        ),
+//                        new SequentialAction(
+//                                powersub.gunAction(List.of(() -> powersub.intakeon())),
+//                                endAction()
+//                        ),
+//                        new SequentialAction(
+//                                drive.actionBuilder(lastPose)
+//                                        .lineToYLinearHeading(-40, Math.toRadians(270))
+//                                        .splineToLinearHeading(new Pose2d(-14, -10, Math.toRadians(225)), 0.5)
+//                                        .build(),
+//                                endAction()
+//                        ),
+//                        new SequentialAction(
+//                                servosub.servoAction(List.of(() -> servosub.Safetyoff())),
+//                                powersub.gunAction(List.of(() -> powersub.power()))
+//                        ),
+//                        new SequentialAction(
+//                                drive.actionBuilder(lastPose)
+//                                        .splineToLinearHeading(new Pose2d(12, -25, Math.toRadians(270)), 1)
+//                                        .setTangent(1.55)
+//                                        .build(),
+//                                endAction()
+//                        ),
+//                        new SequentialAction(
+//                                drive.actionBuilder(lastPose)
+//                                        .lineToYLinearHeading(-40, Math.toRadians(270))
+//                                        .build(),
+//                                endAction()
+//                        )
+//
+//                )
+//        );
+//    }
+    public void PREBC12(){
         drivefinished = true;
         Actions.runBlocking(
                 new SequentialAction(
                         new SequentialAction(
                                 drive.actionBuilder(startPose)
-                                        .lineToX(33)
+                                        .lineToXConstantHeading(-13)
+                                        .build(),
+                                endAction()
+                        ),
+                        new SequentialAction(
+                                powersub.gunAction(List.of(()-> powersub.power())),
+                                servosub.servoAction(List.of(()-> servosub.Safetyoff())),
+                                powersub.gunAction(List.of(()-> powersub.intakeon()))
+                        ),
+                        new SleepAction(1),
+                        new SequentialAction(
+                                powersub.gunAction(List.of(()-> powersub.gunoff())),
+                                servosub.servoAction(List.of(()-> servosub.SafetyON())),
+                                powersub.gunAction(List.of(()-> powersub.intakeoff()))
+                        ),
+                        new SequentialAction(
+                                drive.actionBuilder(lastPose)
+                                        .splineToLinearHeading(new Pose2d(-13,-27,Math.toRadians(270)),0)
+                                        .turnTo(Math.toRadians(271))
+                                        .build(),
+                                endAction()
+                        ),
+                        new SequentialAction(
+                                powersub.gunAction(List.of(()->powersub.intakeon()))
+                        ),
+                        new SequentialAction(
+                                drive.actionBuilder(lastPose)
+                                        .lineToY(-50)
+                                        .build(),
+                                endAction()
+                        ),
+                        new SequentialAction(
+                                powersub.gunAction(List.of(()->powersub.intakeoff()))
+                        ),
+                        new SequentialAction(
+                                drive.actionBuilder(lastPose)
+                                        .splineToLinearHeading(new Pose2d(-13,-20,Math.toRadians(220)),0)
+                                        .build(),
+                                endAction()
+                        ),
+                        new SequentialAction(
+                                powersub.gunAction(List.of(()-> powersub.power())),
+                                servosub.servoAction(List.of(()-> servosub.Safetyoff())),
+                                powersub.gunAction(List.of(()-> powersub.intakeon()))
+                        ),
+                        new SleepAction(1),
+                        new SequentialAction(
+                                powersub.gunAction(List.of(()-> powersub.gunoff())),
+                                servosub.servoAction(List.of(()-> servosub.SafetyON())),
+                                powersub.gunAction(List.of(()-> powersub.intakeoff()))
+                        ),
+                        new SequentialAction(
+                                drive.actionBuilder(lastPose)
+                                        .splineToLinearHeading(new Pose2d(13,-20,Math.toRadians(270)),0)
+                                        .build(),
+                                endAction()
+                        ),
+                        new SequentialAction(
+                                powersub.gunAction(List.of(()->powersub.intakeon()))
+                        ),
+                        new SequentialAction(
+                                drive.actionBuilder(lastPose)
+                                        .lineToY(-50)
+                                        .lineToY(-48)
+                                        .build(),
+                                endAction()
+                        ),
+                        new SequentialAction(
+                                powersub.gunAction(List.of(()->powersub.intakeoff()))
+                        ),
+                        new SequentialAction(
+                                drive.actionBuilder(lastPose)
+                                        .splineToLinearHeading(new Pose2d(-13,-20,Math.toRadians(220)),0)
+                                        .build(),
+                                endAction()
+                        ),
+                        new SequentialAction(
+                                powersub.gunAction(List.of(()-> powersub.power())),
+                                servosub.servoAction(List.of(()-> servosub.Safetyoff())),
+                                powersub.gunAction(List.of(()-> powersub.intakeon()))
+                        ),
+                        new SleepAction(1),
+                        new SequentialAction(
+                                powersub.gunAction(List.of(()-> powersub.gunoff())),
+                                servosub.servoAction(List.of(()-> servosub.SafetyON())),
+                                powersub.gunAction(List.of(()-> powersub.intakeoff()))
+                        ),
+                        new SequentialAction(
+                                drive.actionBuilder(lastPose)
+                                        .splineToLinearHeading(new Pose2d(25,-20,Math.toRadians(270)),0)
+                                        .turnTo(Math.toRadians(271))
+                                        .build(),
+                                endAction()
+                        ),
+                        new SequentialAction(
+                                powersub.gunAction(List.of(()->powersub.intakeon()))
+                        ),
+                        new SequentialAction(
+                                drive.actionBuilder(lastPose)
+                                        .lineToY(-50)
+                                        .build(),
+                                endAction()
+                        ),
+                        new SequentialAction(
+                                powersub.gunAction(List.of(()->powersub.intakeoff()))
+                        ),
+                        new SequentialAction(
+                                drive.actionBuilder(lastPose)
+                                        .splineToLinearHeading(new Pose2d(-13,-20,Math.toRadians(220)),0)
+                                        .build(),
+                                endAction()
+                        ),
+                        new SequentialAction(
+                                powersub.gunAction(List.of(()-> powersub.power())),
+                                servosub.servoAction(List.of(()-> servosub.Safetyoff())),
+                                powersub.gunAction(List.of(()-> powersub.intakeon()))
+                        ),
+                        new SleepAction(1),
+                        new SequentialAction(
+                                powersub.gunAction(List.of(()-> powersub.gunoff())),
+                                servosub.servoAction(List.of(()-> servosub.SafetyON())),
+                                powersub.gunAction(List.of(()-> powersub.intakeoff()))
+                        ),
+                        new SequentialAction(
+                                drive.actionBuilder(lastPose)
+                                        .splineToLinearHeading(new Pose2d(10, -20, Math.toRadians(180)), 0)
                                         .build(),
                                 endAction()
                         )
+
+                )
+        );
+    }
+    public void PRERC12(){
+        drivefinished = true;
+        Actions.runBlocking(
+                new SequentialAction(
+                        new SequentialAction(
+                                drive.actionBuilder(startPose)
+                                        .lineToXConstantHeading(-13)
+                                        .build(),
+                                endAction()
+                        ),
+                        new SequentialAction(
+                                powersub.gunAction(List.of(()-> powersub.power())),
+                                servosub.servoAction(List.of(()-> servosub.Safetyoff())),
+                                powersub.gunAction(List.of(()-> powersub.intakeon()))
+                        ),
+                        new SleepAction(1),
+                        new SequentialAction(
+                                powersub.gunAction(List.of(()-> powersub.gunoff())),
+                                servosub.servoAction(List.of(()-> servosub.SafetyON())),
+                                powersub.gunAction(List.of(()-> powersub.intakeoff()))
+                        ),
+                        new SequentialAction(
+                                drive.actionBuilder(lastPose)
+                                        .splineToLinearHeading(new Pose2d(-13,27,Math.toRadians(90)),0)
+                                        .turnTo(Math.toRadians(91))
+                                        .build(),
+                                endAction()
+                        ),
+                        new SequentialAction(
+                                powersub.gunAction(List.of(()->powersub.intakeon()))
+                        ),
+                        new SequentialAction(
+                                drive.actionBuilder(lastPose)
+                                        .lineToY(50)
+                                        .build(),
+                                endAction()
+                        ),
+                        new SequentialAction(
+                                powersub.gunAction(List.of(()->powersub.intakeoff()))
+                        ),
+                        new SequentialAction(
+                                drive.actionBuilder(lastPose)
+                                        .splineToLinearHeading(new Pose2d(-13,20,Math.toRadians(145)),0)
+                                        .build(),
+                                endAction()
+                        ),
+                        new SequentialAction(
+                                powersub.gunAction(List.of(()-> powersub.power())),
+                                servosub.servoAction(List.of(()-> servosub.Safetyoff())),
+                                powersub.gunAction(List.of(()-> powersub.intakeon()))
+                        ),
+                        new SleepAction(1),
+                        new SequentialAction(
+                                powersub.gunAction(List.of(()-> powersub.gunoff())),
+                                servosub.servoAction(List.of(()-> servosub.SafetyON())),
+                                powersub.gunAction(List.of(()-> powersub.intakeoff()))
+                        ),
+                        new SequentialAction(
+                                drive.actionBuilder(lastPose)
+                                        .splineToLinearHeading(new Pose2d(13,20,Math.toRadians(90)),0)
+                                        .build(),
+                                endAction()
+                        ),
+                        new SequentialAction(
+                                powersub.gunAction(List.of(()->powersub.intakeon()))
+                        ),
+                        new SequentialAction(
+                                drive.actionBuilder(lastPose)
+                                        .lineToY(50)
+                                        .lineToY(48)
+                                        .build(),
+                                endAction()
+                        ),
+                        new SequentialAction(
+                                powersub.gunAction(List.of(()->powersub.intakeoff()))
+                        ),
+                        new SequentialAction(
+                                drive.actionBuilder(lastPose)
+                                        .splineToLinearHeading(new Pose2d(-13,20,Math.toRadians(145)),0)
+                                        .build(),
+                                endAction()
+                        ),
+                        new SequentialAction(
+                                powersub.gunAction(List.of(()-> powersub.power())),
+                                servosub.servoAction(List.of(()-> servosub.Safetyoff())),
+                                powersub.gunAction(List.of(()-> powersub.intakeon()))
+                        ),
+                        new SleepAction(1),
+                        new SequentialAction(
+                                powersub.gunAction(List.of(()-> powersub.gunoff())),
+                                servosub.servoAction(List.of(()-> servosub.SafetyON())),
+                                powersub.gunAction(List.of(()-> powersub.intakeoff()))
+                        ),
+                        new SequentialAction(
+                                drive.actionBuilder(lastPose)
+                                        .splineToLinearHeading(new Pose2d(25,20,Math.toRadians(90)),0)
+                                        .turnTo(Math.toRadians(91))
+                                        .build(),
+                                endAction()
+                        ),
+                        new SequentialAction(
+                                powersub.gunAction(List.of(()->powersub.intakeon()))
+                        ),
+                        new SequentialAction(
+                                drive.actionBuilder(lastPose)
+                                        .lineToY(50)
+                                        .build(),
+                                endAction()
+                        ),
+                        new SequentialAction(
+                                powersub.gunAction(List.of(()->powersub.intakeoff()))
+                        ),
+                        new SequentialAction(
+                                drive.actionBuilder(lastPose)
+                                        .splineToLinearHeading(new Pose2d(-13,20,Math.toRadians(145)),0)
+                                        .build(),
+                                endAction()
+                        ),
+                        new SequentialAction(
+                                powersub.gunAction(List.of(()-> powersub.power())),
+                                servosub.servoAction(List.of(()-> servosub.Safetyoff())),
+                                powersub.gunAction(List.of(()-> powersub.intakeon()))
+                        ),
+                        new SleepAction(1),
+                        new SequentialAction(
+                                powersub.gunAction(List.of(()-> powersub.gunoff())),
+                                servosub.servoAction(List.of(()-> servosub.SafetyON())),
+                                powersub.gunAction(List.of(()-> powersub.intakeoff()))
+                        ),
+                        new SequentialAction(
+                                drive.actionBuilder(lastPose)
+                                        .splineToLinearHeading(new Pose2d(10, 20, Math.toRadians(180)), 0)
+                                        .build(),
+                                endAction()
+                        )
+
                 )
         );
     }
 
-    public void twelveballtheorecical() {
+    public void LEVIAUTOB() {
         drivefinished = true;
         Actions.runBlocking(
                 new SequentialAction(
+                        new SequentialAction(
+                                drive.actionBuilder(startPose)
+                                        .turnTo(Math.toRadians(220))
+                                        .build(),
+                                endAction()
+                        ),
                         new SequentialAction(
                                 powersub.gunAction(List.of(() -> powersub.power())),
-                                endAction()
-                        ),
-                        new SequentialAction(
-                                drive.actionBuilder(startPose)
-                                        .lineToXConstantHeading(-14)
-                                        .build(),
-                                endAction()
-                        ),
-                        new SequentialAction(
-                                powersub.gunAction(List.of(() -> powersub.intakeon())),
                                 servosub.servoAction(List.of(() -> servosub.Safetyoff())),
-                                endAction()
+                                powersub.gunAction(List.of(() -> powersub.intakeon()))
                         ),
-                        new SequentialAction(
+                        new SleepAction(1
+                        ),
+                        new ParallelAction(
                                 powersub.gunAction(List.of(() -> powersub.gunoff())),
-                                powersub.gunAction(List.of(() -> powersub.intakeoff())),
                                 servosub.servoAction(List.of(() -> servosub.SafetyON())),
-                                endAction()
+                                powersub.gunAction(List.of(() -> powersub.intakeoff()))
                         ),
                         new SequentialAction(
                                 drive.actionBuilder(lastPose)
-
                                         .turnTo(Math.toRadians(270))
-                                        .strafeToLinearHeading(new Vector2d(-14, -10), Math.toRadians(270))
-                                        .setTangent(1.6)
+                                        .lineToY(-45)
+                                        .strafeToLinearHeading(new Vector2d(45, -45), Math.toRadians(270))
+                                        .turnTo(Math.toRadians(271))
+                                        .lineToY(-52)
+                                        .turnTo(Math.toRadians(0))
+                                        .strafeToLinearHeading(new Vector2d(45, -61), Math.toRadians(0))
+                                        .turnTo(Math.toRadians(1))
                                         .build(),
                                 endAction()
                         ),
                         new SequentialAction(
-                                powersub.gunAction(List.of(() -> powersub.intakeon())),
-                                endAction()
+                                powersub.gunAction(List.of(() -> powersub.intakeon()))
                         ),
                         new SequentialAction(
                                 drive.actionBuilder(lastPose)
-                                        .lineToYLinearHeading(-40, Math.toRadians(270))
-                                        .splineToLinearHeading(new Pose2d(-14, -10, Math.toRadians(225)), 0.5)
+                                        .lineToX(58)
                                         .build(),
                                 endAction()
-                                ),
+                        ),
                         new SequentialAction(
+                                powersub.gunAction(List.of(() -> powersub.intakeoff()))
+                        ),
+                        new SequentialAction(
+                                drive.actionBuilder(lastPose)
+                                        .lineToX(52)
+                                        .strafeToLinearHeading(new Vector2d(52, -15), Math.toRadians(220))
+                                        .build(),
+                                endAction()
+                        ),
+                        new SequentialAction(
+                                powersub.gunAction(List.of(() -> powersub.power())),
                                 servosub.servoAction(List.of(() -> servosub.Safetyoff())),
-                                powersub.gunAction(List.of(()-> powersub.power()))
+                                powersub.gunAction(List.of(() -> powersub.intakeon()))
+                        ),
+                        new SleepAction(1
+                        ),
+                        new ParallelAction(
+                                powersub.gunAction(List.of(() -> powersub.gunoff())),
+                                servosub.servoAction(List.of(() -> servosub.SafetyON())),
+                                powersub.gunAction(List.of(() -> powersub.intakeoff()))
                         ),
                         new SequentialAction(
                                 drive.actionBuilder(lastPose)
-                                        .splineToLinearHeading(new Pose2d(12, -25, Math.toRadians(270)), 1)
-                                        .setTangent(1.55)
-                                        .lineToYLinearHeading(-40, Math.toRadians(270))
-                                        .splineToLinearHeading(new Pose2d(-14, -10, Math.toRadians(225)), 1)
-                                        .strafeToLinearHeading(new Vector2d(0, -52), Math.toRadians(180))
-                                        .waitSeconds(3)
-                                        .strafeToLinearHeading(new Vector2d(35, -20), Math.toRadians(270))
-                                        .setTangent(1.55)
-                                        .lineToYLinearHeading(-40, Math.toRadians(270))
-                                        .splineToLinearHeading(new Pose2d(-14, -10, Math.toRadians(225)), 1)
+                                        .splineToLinearHeading(new Pose2d(48, -20, Math.toRadians(270)), 1)
+                                        .turnTo(Math.toRadians(271))
+                                        .build(),
+                                endAction()
+                        ),
+                        new SequentialAction(
+                                powersub.gunAction(List.of(() -> powersub.intakeon()))
+                        ),
+                        new SequentialAction(
+                                drive.actionBuilder(lastPose)
+                                        .lineToY(-52)
+                                        .build(),
+                                endAction()
+                        ),
+                        new SequentialAction(
+                                powersub.gunAction(List.of(() -> powersub.intakeoff()))
+                        ),
+                        new SequentialAction(
+                                drive.actionBuilder(lastPose)
+                                        .splineToLinearHeading(new Pose2d(52, -15, Math.toRadians(220)), 1)
+                                        .build(),
+                                endAction()
+                        ),
+                        new SequentialAction(
+                                powersub.gunAction(List.of(() -> powersub.power())),
+                                servosub.servoAction(List.of(() -> servosub.Safetyoff())),
+                                powersub.gunAction(List.of(() -> powersub.intakeon()))
+                        ),
+                        new SleepAction(1
+                        ),
+                        new ParallelAction(
+                                powersub.gunAction(List.of(() -> powersub.gunoff())),
+                                servosub.servoAction(List.of(() -> servosub.SafetyON())),
+                                powersub.gunAction(List.of(() -> powersub.intakeoff()))
+                        ),
+                        new SequentialAction(
+                                drive.actionBuilder(lastPose)
+                                        .splineToLinearHeading(new Pose2d(30, -15, Math.toRadians(270)), 1)
                                         .build(),
                                 endAction()
                         )
-
                 )
         );
     }
 
-    public void newauto() {
+    public void LEVIAUTOR() {
         drivefinished = true;
         Actions.runBlocking(
                 new SequentialAction(
                         new SequentialAction(
                                 drive.actionBuilder(startPose)
-                                        .lineToXConstantHeading(15)
+                                        .turnTo(Math.toRadians(150))//!GUESSTIMATED PLEASE RECHECK THIS  THEN FIX FOR OTHER PLACES
+                                        .build(),
+                                endAction()
+                        ),
+                        new SequentialAction(
+                                powersub.gunAction(List.of(() -> powersub.power())),
+                                servosub.servoAction(List.of(() -> servosub.Safetyoff())),
+                                powersub.gunAction(List.of(() -> powersub.intakeon()))
+                        ),
+                        new SleepAction(1
+                        ),
+                        new ParallelAction(
+                                powersub.gunAction(List.of(() -> powersub.gunoff())),
+                                servosub.servoAction(List.of(() -> servosub.SafetyON())),
+                                powersub.gunAction(List.of(() -> powersub.intakeoff()))
+                        ),
+                        new SequentialAction(
+                                drive.actionBuilder(lastPose)
+                                        .turnTo(Math.toRadians(90))
+                                        .lineToY(45)
+                                        .strafeToLinearHeading(new Vector2d(45, 45), Math.toRadians(90))
+                                        .turnTo(Math.toRadians(91))
+                                        .lineToY(52)
+                                        .turnTo(Math.toRadians(0))
+                                        .strafeToLinearHeading(new Vector2d(-45, 56), Math.toRadians(0))
+                                        .turnTo(Math.toRadians(1))
+                                        .build(),
+                                endAction()
+                        ),
+                        new SequentialAction(
+                                powersub.gunAction(List.of(() -> powersub.intakeon()))
+                        ),
+                        new SequentialAction(
+                                drive.actionBuilder(lastPose)
+                                        .lineToX(56)
+                                        .build(),
+                                endAction()
+                        ),
+                        new SequentialAction(
+                                powersub.gunAction(List.of(() -> powersub.intakeoff()))
+                        ),
+                        new SequentialAction(
+                                drive.actionBuilder(lastPose)
+                                        .lineToX(52)
+                                        .strafeToLinearHeading(new Vector2d(52, 10), Math.toRadians(150))
+                                        .build(),
+                                endAction()
+                        ),
+                        new SequentialAction(
+                                powersub.gunAction(List.of(() -> powersub.power())),
+                                servosub.servoAction(List.of(() -> servosub.Safetyoff())),
+                                powersub.gunAction(List.of(() -> powersub.intakeon()))
+                        ),
+                        new SleepAction(1
+                        ),
+                        new ParallelAction(
+                                powersub.gunAction(List.of(() -> powersub.gunoff())),
+                                servosub.servoAction(List.of(() -> servosub.SafetyON())),
+                                powersub.gunAction(List.of(() -> powersub.intakeoff()))
+                        ),
+                        new SequentialAction(
+                                drive.actionBuilder(lastPose)
+                                        .splineToLinearHeading(new Pose2d(48, 20, Math.toRadians(150)), 1)
+                                        .turnTo(Math.toRadians(91))
+                                        .build(),
+                                endAction()
+                        ),
+                        new SequentialAction(
+                                powersub.gunAction(List.of(() -> powersub.intakeon()))
+                        ),
+                        new SequentialAction(
+                                drive.actionBuilder(lastPose)
+                                        .lineToX(-52)
+                                        .build(),
+                                endAction()
+                        ),
+                        new SequentialAction(
+                                powersub.gunAction(List.of(() -> powersub.intakeoff()))
+                        ),
+                        new SequentialAction(
+                                drive.actionBuilder(lastPose)
+                                        .splineToLinearHeading(new Pose2d(52, 10, Math.toRadians(150)), 1)
+                                        .build(),
+                                endAction()
+                        ),
+                        new SequentialAction(
+                                powersub.gunAction(List.of(() -> powersub.power())),
+                                servosub.servoAction(List.of(() -> servosub.Safetyoff())),
+                                powersub.gunAction(List.of(() -> powersub.intakeon()))
+                        ),
+                        new SleepAction(1
+                        ),
+                        new ParallelAction(
+                                powersub.gunAction(List.of(() -> powersub.gunoff())),
+                                servosub.servoAction(List.of(() -> servosub.SafetyON())),
+                                powersub.gunAction(List.of(() -> powersub.intakeoff()))
+                        ),
+                        new SequentialAction(
+                                drive.actionBuilder(lastPose)
+                                        .splineToLinearHeading(new Pose2d(30, 10, Math.toRadians(150)), 1)
                                         .build(),
                                 endAction()
                         )
                 )
         );
     }
+
 
     //theoretical ^
     //            |
