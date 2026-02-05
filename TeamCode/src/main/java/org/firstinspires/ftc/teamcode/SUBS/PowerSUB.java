@@ -56,8 +56,8 @@ public class PowerSUB {
         shooterR = hwMap.get(DcMotorEx.class,"shooterR");
         intakeR = hwMap.get(DcMotor.class,"intakeR");
         intakeL = hwMap.get(DcMotor.class, "intakeL");
-        intakeL.setDirection(DcMotorSimple.Direction.REVERSE);
-        intakeR.setDirection(DcMotorSimple.Direction.FORWARD);
+        intakeL.setDirection(DcMotorSimple.Direction.FORWARD);
+        intakeR.setDirection(DcMotorSimple.Direction.REVERSE);
         shooterL.setDirection(DcMotorSimple.Direction.REVERSE);
         shooterR.setDirection(DcMotorSimple.Direction.FORWARD);
         PIDFCoefficients pidfCoefficients = new PIDFCoefficients(FlyUTIL.p, 0, 0, FlyUTIL.f);
