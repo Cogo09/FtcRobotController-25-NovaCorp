@@ -203,6 +203,21 @@ public class AUTOHARDWARE extends HARDWARECONFIG {
 //                )
 //        );
 //    }
+    public void TEST(){
+        drivefinished = true;
+        Actions.runBlocking(
+                new SequentialAction(
+                        new SequentialAction(
+                                powersub.gunAction(List.of(()-> powersub.intakeon()))
+
+                        ),
+                        new SleepAction(1),
+                        new SequentialAction(
+                                powersub.gunAction(List.of(()-> powersub.intakeoff()))
+                        )
+                )
+        );
+    }
     public void PREBC12(){
         drivefinished = true;
         Actions.runBlocking(
