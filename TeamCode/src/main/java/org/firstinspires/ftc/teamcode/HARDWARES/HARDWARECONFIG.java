@@ -97,8 +97,9 @@ public class HARDWARECONFIG {
 
        // t = Turn(1.7);
 //         limelight = hwmap.get(Limelight3A.class, "limelight");
-        backLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+
         frontLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+        backLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
 //        intakeL.setDirection(DcMotorSimple.Direction.REVERSE);
 //        intakeR.setDirection(DcMotorSimple.Direction.FORWARD);
 
