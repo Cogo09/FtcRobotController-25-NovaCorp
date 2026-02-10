@@ -26,7 +26,7 @@ public class C12R extends LinearOpMode {
     ///
     @Override//
     public void runOpMode() throws InterruptedException {
-        robot = new AUTOHARDWARE(this, hardwareMap, new Pose2d(-52,-50,Math.toRadians(220)));
+        robot = new AUTOHARDWARE(this, hardwareMap, new Pose2d(-52,-50,Math.toRadians(145)));
         waitForStart();
         if (opModeIsActive()){
             robot.PRERC12();
