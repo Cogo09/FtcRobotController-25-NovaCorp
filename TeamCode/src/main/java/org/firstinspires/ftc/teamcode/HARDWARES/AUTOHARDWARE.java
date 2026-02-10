@@ -214,6 +214,12 @@ public class AUTOHARDWARE extends HARDWARECONFIG {
                         new SleepAction(1),
                         new SequentialAction(
                                 powersub.gunAction(List.of(()-> powersub.intakeoff()))
+                        ),
+                        new SequentialAction(
+                                drive.actionBuilder(startPose)
+                                        .lineToX(0)
+                                        .build(),
+                                endAction()
                         )
                 )
         );

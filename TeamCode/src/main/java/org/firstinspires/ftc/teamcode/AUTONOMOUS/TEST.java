@@ -26,7 +26,7 @@ public class TEST extends LinearOpMode {
     ///
     @Override//
     public void runOpMode() throws InterruptedException {
-        robot = new AUTOHARDWARE(this, hardwareMap, new Pose2d(0,20,Math.toRadians(180)));
+        robot = new AUTOHARDWARE(this, hardwareMap, new Pose2d(56,0,Math.toRadians(0)));
         waitForStart();
         if (opModeIsActive()){
             robot.TEST();
