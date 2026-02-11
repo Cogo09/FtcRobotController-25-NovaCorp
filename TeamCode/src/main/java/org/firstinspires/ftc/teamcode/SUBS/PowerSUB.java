@@ -35,13 +35,15 @@ public class PowerSUB {
     public void extrapower(){gunStateVar = gunSTATE.EXTRA;}
     public void gunidle(){gunStateVar = gunSTATE.IDLE;}
 
-    public enum intakeSTATE {ON, OFF, REVERSE, IDLE}
+    public enum intakeSTATE {ON, OFF,LEFT, REVERSE, IDLE}
 
     private PowerSUB.intakeSTATE intakeStateVar = PowerSUB.intakeSTATE.IDLE;
 
     public void intakeon() {
         intakeStateVar = intakeSTATE.ON;
     }
+    public void intakeonl(){intakeStateVar = intakeSTATE.LEFT;}
+   //p
 
     public void intakeoff() {
         intakeStateVar = intakeSTATE.OFF;
@@ -71,15 +73,20 @@ public class PowerSUB {
         switch (intakeStateVar) {
             case ON:
                 intakeR.setPower(1);
+
                 intakeL.setPower(1);
                 break;
+            case LEFT:
+                intakeL.setPower(1);
+                intakeR.setPower(0.7);
+
             case OFF:
                 intakeR.setPower(0);
                 intakeL.setPower(0);
                 break;
             case REVERSE:
-                intakeR.setPower(-0.5);
-                intakeL.setPower(-0.5);
+                intakeR.setPower(-1);
+                intakeL.setPower(-1);
                 break;
             case IDLE:
 
@@ -88,9 +95,9 @@ public class PowerSUB {
 
         switch (gunStateVar) {
             case ON:
-                shooterL.setVelocity(0.45*FlyUTIL.highvelo);
+                shooterL.setVelocity(0.48*FlyUTIL.highvelo);
 
-                shooterR.setVelocity(0.45*FlyUTIL.highvelo);
+                shooterR.setVelocity(0.48*FlyUTIL.highvelo);
                 break;
             case OFF:
                 shooterL.setVelocity(0.0);

@@ -207,7 +207,7 @@ public class HARDWARECONFIG {
         if (opMode.gamepad1.left_bumper) {
             powersub.intakereverse();
         } else if (opMode.gamepad1.right_bumper) {
-            powersub.intakeon();
+            powersub.intakeonl();
         } else {
             powersub.intakeoff();
         }
