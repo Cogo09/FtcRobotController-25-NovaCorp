@@ -77,8 +77,8 @@ public class PowerSUB {
 
                 break;
             case ON:
-                intakeL.setPower(1);
-                intakeR.setPower(1);
+                intakeL.setPower(0.9);
+                intakeR.setPower(0.9);
                 break;
 
             case OFF:

@@ -111,6 +111,37 @@ public class AUTOHARDWARE extends HARDWARECONFIG {
         );
     }
 
+    public void TESTER() {
+        drivefinished = true;
+        Actions.runBlocking(
+                new SequentialAction(
+                        new SequentialAction(
+                                drive.actionBuilder(startPose)
+                                        .lineToXConstantHeading(-22)
+                                        .build(),
+                                endAction()
+                        ),
+                        new SequentialAction(
+                                powersub.gunAction(List.of(() -> powersub.power()))
+                        ),
+                        new SleepAction(1),
+                        new SequentialAction(
+                                powersub.gunAction(List.of(() -> powersub.intakeon()))
+                        ),
+                        new SleepAction(1),
+                        new SequentialAction(
+                                powersub.gunAction(List.of(() -> powersub.intakeoff())),
+                                powersub.gunAction(List.of(() -> powersub.gunoff()))
+                        ),
+                        new SequentialAction(
+                                drive.actionBuilder(lastPose)
+                                        .lineToX(0)
+                                        .build(),
+                                endAction()
+                        )
+        ));
+    }
+
     public void FLLR() {
         drivefinished = true;
         Actions.runBlocking(
@@ -136,7 +167,7 @@ public class AUTOHARDWARE extends HARDWARECONFIG {
     }
 
 
-//    public void twelveballtheorecical() {
+    //    public void twelveballtheorecical() {
 //        drivefinished = true;
 //        Actions.runBlocking(
 //                new SequentialAction(
@@ -203,17 +234,17 @@ public class AUTOHARDWARE extends HARDWARECONFIG {
 //                )
 //        );
 //    }
-    public void TEST(){
+    public void TEST() {
         drivefinished = true;
         Actions.runBlocking(
                 new SequentialAction(
                         new SequentialAction(
-                                powersub.gunAction(List.of(()-> powersub.intakeon()))
+                                powersub.gunAction(List.of(() -> powersub.intakeon()))
 
                         ),
                         new SleepAction(1),
                         new SequentialAction(
-                                powersub.gunAction(List.of(()-> powersub.intakeoff()))
+                                powersub.gunAction(List.of(() -> powersub.intakeoff()))
                         ),
                         new SequentialAction(
                                 drive.actionBuilder(startPose)
@@ -224,7 +255,8 @@ public class AUTOHARDWARE extends HARDWARECONFIG {
                 )
         );
     }
-    public void PREBC12(){
+
+    public void PREBC12() {
         drivefinished = true;
         Actions.runBlocking(
                 new SequentialAction(
@@ -235,25 +267,25 @@ public class AUTOHARDWARE extends HARDWARECONFIG {
                                 endAction()
                         ),
                         new SequentialAction(
-                                powersub.gunAction(List.of(()-> powersub.power())),
-                                servosub.servoAction(List.of(()-> servosub.Safetyoff())),
-                                powersub.gunAction(List.of(()-> powersub.intakeon()))
+                                powersub.gunAction(List.of(() -> powersub.power())),
+                                servosub.servoAction(List.of(() -> servosub.Safetyoff())),
+                                powersub.gunAction(List.of(() -> powersub.intakeon()))
                         ),
                         new SleepAction(1),
                         new SequentialAction(
-                                powersub.gunAction(List.of(()-> powersub.gunoff())),
-                                servosub.servoAction(List.of(()-> servosub.SafetyON())),
-                                powersub.gunAction(List.of(()-> powersub.intakeoff()))
+                                powersub.gunAction(List.of(() -> powersub.gunoff())),
+                                servosub.servoAction(List.of(() -> servosub.SafetyON())),
+                                powersub.gunAction(List.of(() -> powersub.intakeoff()))
                         ),
                         new SequentialAction(
                                 drive.actionBuilder(lastPose)
-                                        .splineToLinearHeading(new Pose2d(-13,-27,Math.toRadians(270)),0)
+                                        .splineToLinearHeading(new Pose2d(-13, -27, Math.toRadians(270)), 0)
                                         .turnTo(Math.toRadians(271))
                                         .build(),
                                 endAction()
                         ),
                         new SequentialAction(
-                                powersub.gunAction(List.of(()->powersub.intakeon()))
+                                powersub.gunAction(List.of(() -> powersub.intakeon()))
                         ),
                         new SequentialAction(
                                 drive.actionBuilder(lastPose)
@@ -262,33 +294,33 @@ public class AUTOHARDWARE extends HARDWARECONFIG {
                                 endAction()
                         ),
                         new SequentialAction(
-                                powersub.gunAction(List.of(()->powersub.intakeoff()))
+                                powersub.gunAction(List.of(() -> powersub.intakeoff()))
                         ),
                         new SequentialAction(
                                 drive.actionBuilder(lastPose)
-                                        .splineToLinearHeading(new Pose2d(-13,-20,Math.toRadians(220)),0)
+                                        .splineToLinearHeading(new Pose2d(-13, -20, Math.toRadians(220)), 0)
                                         .build(),
                                 endAction()
                         ),
                         new SequentialAction(
-                                powersub.gunAction(List.of(()-> powersub.power())),
-                                servosub.servoAction(List.of(()-> servosub.Safetyoff())),
-                                powersub.gunAction(List.of(()-> powersub.intakeon()))
+                                powersub.gunAction(List.of(() -> powersub.power())),
+                                servosub.servoAction(List.of(() -> servosub.Safetyoff())),
+                                powersub.gunAction(List.of(() -> powersub.intakeon()))
                         ),
                         new SleepAction(1),
                         new SequentialAction(
-                                powersub.gunAction(List.of(()-> powersub.gunoff())),
-                                servosub.servoAction(List.of(()-> servosub.SafetyON())),
-                                powersub.gunAction(List.of(()-> powersub.intakeoff()))
+                                powersub.gunAction(List.of(() -> powersub.gunoff())),
+                                servosub.servoAction(List.of(() -> servosub.SafetyON())),
+                                powersub.gunAction(List.of(() -> powersub.intakeoff()))
                         ),
                         new SequentialAction(
                                 drive.actionBuilder(lastPose)
-                                        .splineToLinearHeading(new Pose2d(13,-20,Math.toRadians(270)),0)
+                                        .splineToLinearHeading(new Pose2d(13, -20, Math.toRadians(270)), 0)
                                         .build(),
                                 endAction()
                         ),
                         new SequentialAction(
-                                powersub.gunAction(List.of(()->powersub.intakeon()))
+                                powersub.gunAction(List.of(() -> powersub.intakeon()))
                         ),
                         new SequentialAction(
                                 drive.actionBuilder(lastPose)
@@ -298,34 +330,34 @@ public class AUTOHARDWARE extends HARDWARECONFIG {
                                 endAction()
                         ),
                         new SequentialAction(
-                                powersub.gunAction(List.of(()->powersub.intakeoff()))
+                                powersub.gunAction(List.of(() -> powersub.intakeoff()))
                         ),
                         new SequentialAction(
                                 drive.actionBuilder(lastPose)
-                                        .splineToLinearHeading(new Pose2d(-13,-20,Math.toRadians(220)),0)
+                                        .splineToLinearHeading(new Pose2d(-13, -20, Math.toRadians(220)), 0)
                                         .build(),
                                 endAction()
                         ),
                         new SequentialAction(
-                                powersub.gunAction(List.of(()-> powersub.power())),
-                                servosub.servoAction(List.of(()-> servosub.Safetyoff())),
-                                powersub.gunAction(List.of(()-> powersub.intakeon()))
+                                powersub.gunAction(List.of(() -> powersub.power())),
+                                servosub.servoAction(List.of(() -> servosub.Safetyoff())),
+                                powersub.gunAction(List.of(() -> powersub.intakeon()))
                         ),
                         new SleepAction(1),
                         new SequentialAction(
-                                powersub.gunAction(List.of(()-> powersub.gunoff())),
-                                servosub.servoAction(List.of(()-> servosub.SafetyON())),
-                                powersub.gunAction(List.of(()-> powersub.intakeoff()))
+                                powersub.gunAction(List.of(() -> powersub.gunoff())),
+                                servosub.servoAction(List.of(() -> servosub.SafetyON())),
+                                powersub.gunAction(List.of(() -> powersub.intakeoff()))
                         ),
                         new SequentialAction(
                                 drive.actionBuilder(lastPose)
-                                        .splineToLinearHeading(new Pose2d(25,-20,Math.toRadians(270)),0)
+                                        .splineToLinearHeading(new Pose2d(25, -20, Math.toRadians(270)), 0)
                                         .turnTo(Math.toRadians(271))
                                         .build(),
                                 endAction()
                         ),
                         new SequentialAction(
-                                powersub.gunAction(List.of(()->powersub.intakeon()))
+                                powersub.gunAction(List.of(() -> powersub.intakeon()))
                         ),
                         new SequentialAction(
                                 drive.actionBuilder(lastPose)
@@ -334,24 +366,24 @@ public class AUTOHARDWARE extends HARDWARECONFIG {
                                 endAction()
                         ),
                         new SequentialAction(
-                                powersub.gunAction(List.of(()->powersub.intakeoff()))
+                                powersub.gunAction(List.of(() -> powersub.intakeoff()))
                         ),
                         new SequentialAction(
                                 drive.actionBuilder(lastPose)
-                                        .splineToLinearHeading(new Pose2d(-13,-20,Math.toRadians(220)),0)
+                                        .splineToLinearHeading(new Pose2d(-13, -20, Math.toRadians(220)), 0)
                                         .build(),
                                 endAction()
                         ),
                         new SequentialAction(
-                                powersub.gunAction(List.of(()-> powersub.power())),
-                                servosub.servoAction(List.of(()-> servosub.Safetyoff())),
-                                powersub.gunAction(List.of(()-> powersub.intakeon()))
+                                powersub.gunAction(List.of(() -> powersub.power())),
+                                servosub.servoAction(List.of(() -> servosub.Safetyoff())),
+                                powersub.gunAction(List.of(() -> powersub.intakeon()))
                         ),
                         new SleepAction(1),
                         new SequentialAction(
-                                powersub.gunAction(List.of(()-> powersub.gunoff())),
-                                servosub.servoAction(List.of(()-> servosub.SafetyON())),
-                                powersub.gunAction(List.of(()-> powersub.intakeoff()))
+                                powersub.gunAction(List.of(() -> powersub.gunoff())),
+                                servosub.servoAction(List.of(() -> servosub.SafetyON())),
+                                powersub.gunAction(List.of(() -> powersub.intakeoff()))
                         ),
                         new SequentialAction(
                                 drive.actionBuilder(lastPose)
@@ -363,7 +395,8 @@ public class AUTOHARDWARE extends HARDWARECONFIG {
                 )
         );
     }
-    public void PRERC12(){
+
+    public void PRERC12() {
         drivefinished = true;
         Actions.runBlocking(
                 new SequentialAction(
@@ -374,25 +407,25 @@ public class AUTOHARDWARE extends HARDWARECONFIG {
                                 endAction()
                         ),
                         new SequentialAction(
-                                powersub.gunAction(List.of(()-> powersub.power())),
-                                servosub.servoAction(List.of(()-> servosub.Safetyoff())),
-                                powersub.gunAction(List.of(()-> powersub.intakeon()))
+                                powersub.gunAction(List.of(() -> powersub.power())),
+                                servosub.servoAction(List.of(() -> servosub.Safetyoff())),
+                                powersub.gunAction(List.of(() -> powersub.intakeon()))
                         ),
                         new SleepAction(1),
                         new SequentialAction(
-                                powersub.gunAction(List.of(()-> powersub.gunoff())),
-                                servosub.servoAction(List.of(()-> servosub.SafetyON())),
-                                powersub.gunAction(List.of(()-> powersub.intakeoff()))
+                                powersub.gunAction(List.of(() -> powersub.gunoff())),
+                                servosub.servoAction(List.of(() -> servosub.SafetyON())),
+                                powersub.gunAction(List.of(() -> powersub.intakeoff()))
                         ),
                         new SequentialAction(
                                 drive.actionBuilder(lastPose)
-                                        .splineToLinearHeading(new Pose2d(-13,27,Math.toRadians(90)),0)
+                                        .splineToLinearHeading(new Pose2d(-13, 27, Math.toRadians(90)), 0)
                                         .turnTo(Math.toRadians(91))
                                         .build(),
                                 endAction()
                         ),
                         new SequentialAction(
-                                powersub.gunAction(List.of(()->powersub.intakeon()))
+                                powersub.gunAction(List.of(() -> powersub.intakeon()))
                         ),
                         new SequentialAction(
                                 drive.actionBuilder(lastPose)
@@ -401,33 +434,33 @@ public class AUTOHARDWARE extends HARDWARECONFIG {
                                 endAction()
                         ),
                         new SequentialAction(
-                                powersub.gunAction(List.of(()->powersub.intakeoff()))
+                                powersub.gunAction(List.of(() -> powersub.intakeoff()))
                         ),
                         new SequentialAction(
                                 drive.actionBuilder(lastPose)
-                                        .splineToLinearHeading(new Pose2d(-13,20,Math.toRadians(145)),0)
+                                        .splineToLinearHeading(new Pose2d(-13, 20, Math.toRadians(145)), 0)
                                         .build(),
                                 endAction()
                         ),
                         new SequentialAction(
-                                powersub.gunAction(List.of(()-> powersub.power())),
-                                servosub.servoAction(List.of(()-> servosub.Safetyoff())),
-                                powersub.gunAction(List.of(()-> powersub.intakeon()))
+                                powersub.gunAction(List.of(() -> powersub.power())),
+                                servosub.servoAction(List.of(() -> servosub.Safetyoff())),
+                                powersub.gunAction(List.of(() -> powersub.intakeon()))
                         ),
                         new SleepAction(1),
                         new SequentialAction(
-                                powersub.gunAction(List.of(()-> powersub.gunoff())),
-                                servosub.servoAction(List.of(()-> servosub.SafetyON())),
-                                powersub.gunAction(List.of(()-> powersub.intakeoff()))
+                                powersub.gunAction(List.of(() -> powersub.gunoff())),
+                                servosub.servoAction(List.of(() -> servosub.SafetyON())),
+                                powersub.gunAction(List.of(() -> powersub.intakeoff()))
                         ),
                         new SequentialAction(
                                 drive.actionBuilder(lastPose)
-                                        .splineToLinearHeading(new Pose2d(13,20,Math.toRadians(90)),0)
+                                        .splineToLinearHeading(new Pose2d(13, 20, Math.toRadians(90)), 0)
                                         .build(),
                                 endAction()
                         ),
                         new SequentialAction(
-                                powersub.gunAction(List.of(()->powersub.intakeon()))
+                                powersub.gunAction(List.of(() -> powersub.intakeon()))
                         ),
                         new SequentialAction(
                                 drive.actionBuilder(lastPose)
@@ -437,34 +470,34 @@ public class AUTOHARDWARE extends HARDWARECONFIG {
                                 endAction()
                         ),
                         new SequentialAction(
-                                powersub.gunAction(List.of(()->powersub.intakeoff()))
+                                powersub.gunAction(List.of(() -> powersub.intakeoff()))
                         ),
                         new SequentialAction(
                                 drive.actionBuilder(lastPose)
-                                        .splineToLinearHeading(new Pose2d(-13,20,Math.toRadians(145)),0)
+                                        .splineToLinearHeading(new Pose2d(-13, 20, Math.toRadians(145)), 0)
                                         .build(),
                                 endAction()
                         ),
                         new SequentialAction(
-                                powersub.gunAction(List.of(()-> powersub.power())),
-                                servosub.servoAction(List.of(()-> servosub.Safetyoff())),
-                                powersub.gunAction(List.of(()-> powersub.intakeon()))
+                                powersub.gunAction(List.of(() -> powersub.power())),
+                                servosub.servoAction(List.of(() -> servosub.Safetyoff())),
+                                powersub.gunAction(List.of(() -> powersub.intakeon()))
                         ),
                         new SleepAction(1),
                         new SequentialAction(
-                                powersub.gunAction(List.of(()-> powersub.gunoff())),
-                                servosub.servoAction(List.of(()-> servosub.SafetyON())),
-                                powersub.gunAction(List.of(()-> powersub.intakeoff()))
+                                powersub.gunAction(List.of(() -> powersub.gunoff())),
+                                servosub.servoAction(List.of(() -> servosub.SafetyON())),
+                                powersub.gunAction(List.of(() -> powersub.intakeoff()))
                         ),
                         new SequentialAction(
                                 drive.actionBuilder(lastPose)
-                                        .splineToLinearHeading(new Pose2d(25,20,Math.toRadians(90)),0)
+                                        .splineToLinearHeading(new Pose2d(25, 20, Math.toRadians(90)), 0)
                                         .turnTo(Math.toRadians(91))
                                         .build(),
                                 endAction()
                         ),
                         new SequentialAction(
-                                powersub.gunAction(List.of(()->powersub.intakeon()))
+                                powersub.gunAction(List.of(() -> powersub.intakeon()))
                         ),
                         new SequentialAction(
                                 drive.actionBuilder(lastPose)
@@ -473,24 +506,24 @@ public class AUTOHARDWARE extends HARDWARECONFIG {
                                 endAction()
                         ),
                         new SequentialAction(
-                                powersub.gunAction(List.of(()->powersub.intakeoff()))
+                                powersub.gunAction(List.of(() -> powersub.intakeoff()))
                         ),
                         new SequentialAction(
                                 drive.actionBuilder(lastPose)
-                                        .splineToLinearHeading(new Pose2d(-13,20,Math.toRadians(145)),0)
+                                        .splineToLinearHeading(new Pose2d(-13, 20, Math.toRadians(145)), 0)
                                         .build(),
                                 endAction()
                         ),
                         new SequentialAction(
-                                powersub.gunAction(List.of(()-> powersub.power())),
-                                servosub.servoAction(List.of(()-> servosub.Safetyoff())),
-                                powersub.gunAction(List.of(()-> powersub.intakeon()))
+                                powersub.gunAction(List.of(() -> powersub.power())),
+                                servosub.servoAction(List.of(() -> servosub.Safetyoff())),
+                                powersub.gunAction(List.of(() -> powersub.intakeon()))
                         ),
                         new SleepAction(1),
                         new SequentialAction(
-                                powersub.gunAction(List.of(()-> powersub.gunoff())),
-                                servosub.servoAction(List.of(()-> servosub.SafetyON())),
-                                powersub.gunAction(List.of(()-> powersub.intakeoff()))
+                                powersub.gunAction(List.of(() -> powersub.gunoff())),
+                                servosub.servoAction(List.of(() -> servosub.SafetyON())),
+                                powersub.gunAction(List.of(() -> powersub.intakeoff()))
                         ),
                         new SequentialAction(
                                 drive.actionBuilder(lastPose)
