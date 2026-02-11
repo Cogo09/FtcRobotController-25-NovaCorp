@@ -35,20 +35,21 @@ public class PowerSUB {
     public void extrapower(){gunStateVar = gunSTATE.EXTRA;}
     public void gunidle(){gunStateVar = gunSTATE.IDLE;}
 
-    public enum intakeSTATE {ON, OFF,LEFT, REVERSE, IDLE}
+    public enum intakeSTATE {ON, OFF,ONL, REVERSE,REVERSESLIGHT, IDLE}
 
     private PowerSUB.intakeSTATE intakeStateVar = PowerSUB.intakeSTATE.IDLE;
 
     public void intakeon() {
         intakeStateVar = intakeSTATE.ON;
     }
-    public void intakeonl(){intakeStateVar = intakeSTATE.LEFT;}
+    public void intakeonl(){intakeStateVar = intakeSTATE.ONL;}
    //p
 
     public void intakeoff() {
         intakeStateVar = intakeSTATE.OFF;
     }
     public void intakereverse(){intakeStateVar = intakeSTATE.REVERSE;}
+    public void intakereverseS(){intakeStateVar = intakeSTATE.REVERSESLIGHT;}
 
 
 
@@ -71,20 +72,24 @@ public class PowerSUB {
     public void update() {
         // this is where you put your state machines and all power functions (call this in our main code)
         switch (intakeStateVar) {
-            case ON:
-                intakeR.setPower(1);
+            case ONL:
+                intakeL.setPower(1);
 
-                intakeL.setPower(1);
                 break;
-            case LEFT:
+            case ON:
                 intakeL.setPower(1);
-                intakeR.setPower(0.7);
+                intakeR.setPower(1);
+                break;
 
             case OFF:
                 intakeR.setPower(0);
                 intakeL.setPower(0);
                 break;
             case REVERSE:
+                intakeR.setPower(-1);
+                intakeL.setPower(-1);
+                break;
+            case REVERSESLIGHT:
                 intakeR.setPower(-1);
                 intakeL.setPower(-1);
                 break;
