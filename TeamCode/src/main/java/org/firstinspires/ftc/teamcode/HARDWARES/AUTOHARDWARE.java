@@ -117,9 +117,10 @@ public class AUTOHARDWARE extends HARDWARECONFIG {
                 new SequentialAction(
                         new SequentialAction(
                                 drive.actionBuilder(startPose)
-                                        .lineToXConstantHeading(-22)
+                                        .lineToXConstantHeading(-23)
                                         .build(),
                                 endAction()
+
                         ),
                         new SequentialAction(
                                 powersub.gunAction(List.of(() -> powersub.power()))
@@ -134,12 +135,46 @@ public class AUTOHARDWARE extends HARDWARECONFIG {
                                 powersub.gunAction(List.of(() -> powersub.gunoff()))
                         ),
                         new SequentialAction(
-                                drive.actionBuilder(lastPose)
-                                        .lineToX(0)
+                                drive.actionBuilder(new Pose2d(-23,20,Math.toRadians(145)))
+                                        .strafeToLinearHeading(new Vector2d(-12,20),Math.toRadians(90))
+                                        .turnTo(Math.toRadians(92))
                                         .build(),
                                 endAction()
+                        ),
+                        new SequentialAction(
+                                powersub.gunAction(List.of(()-> powersub.intakeonl()))
+                        ),
+                        new SequentialAction(
+                                drive.actionBuilder(new Pose2d(-12,20,Math.toRadians(92)))
+                                        .setTangent(0)
+
+                                        .strafeToLinearHeading(new Vector2d(-12,38),Math.toRadians(95))
+                                        .build(),
+                                endAction()
+                        ),
+                        new SequentialAction(
+                                powersub.gunAction(List.of(()->powersub.intakeoff()))
+                        ),
+                        new SequentialAction(
+                                drive.actionBuilder(new Pose2d(-12,38,Math.toRadians(95)))
+                                        .strafeToLinearHeading(new Vector2d(-18,18),Math.toRadians(145))
+                                        .build(),
+                                endAction()
+                        ),
+                        new SequentialAction(
+                                powersub.gunAction(List.of(() -> powersub.littlepower()))
+                        ),
+                        new SleepAction(0.5),
+                        new SequentialAction(
+                                powersub.gunAction(List.of(() -> powersub.intakeon()))
+                        ),
+                        new SleepAction(1),
+                        new SequentialAction(
+                                powersub.gunAction(List.of(() -> powersub.intakeoff())),
+                                powersub.gunAction(List.of(() -> powersub.gunoff()))
                         )
-        ));
+
+                ));
     }
 
     public void FLLR() {

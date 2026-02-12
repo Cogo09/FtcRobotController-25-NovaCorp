@@ -21,43 +21,62 @@ public class PowerSUB {
     private DcMotorEx shooterR;
     private DcMotorEx shooterL;
 
-    public enum gunSTATE {ON, OFF, EXTRA, IDLE}
-//!help
+    public enum gunSTATE {ON, OFF, EXTRA, LITTLE, IDLE}
+
+    //!help
     private PowerSUB.gunSTATE gunStateVar = PowerSUB.gunSTATE.IDLE;
 
     public void power() {
         gunStateVar = gunSTATE.ON;
     }
 
+    public void littlepower() {
+        gunStateVar = gunSTATE.LITTLE;
+    }
+
     public void gunoff() {
         gunStateVar = gunSTATE.OFF;
     }
-    public void extrapower(){gunStateVar = gunSTATE.EXTRA;}
-    public void gunidle(){gunStateVar = gunSTATE.IDLE;}
 
-    public enum intakeSTATE {ON, OFF,ONL, REVERSE,REVERSESLIGHT, IDLE}
+    public void extrapower() {
+        gunStateVar = gunSTATE.EXTRA;
+    }
+
+    public void gunidle() {
+        gunStateVar = gunSTATE.IDLE;
+    }
+
+    public enum intakeSTATE {ON, OFF, ONL, REVERSE, REVERSESLIGHT, IDLE}
 
     private PowerSUB.intakeSTATE intakeStateVar = PowerSUB.intakeSTATE.IDLE;
 
     public void intakeon() {
         intakeStateVar = intakeSTATE.ON;
     }
-    public void intakeonl(){intakeStateVar = intakeSTATE.ONL;}
-   //p
+
+    public void intakeonl() {
+        intakeStateVar = intakeSTATE.ONL;
+    }
+    //p
 
     public void intakeoff() {
         intakeStateVar = intakeSTATE.OFF;
     }
-    public void intakereverse(){intakeStateVar = intakeSTATE.REVERSE;}
-    public void intakereverseS(){intakeStateVar = intakeSTATE.REVERSESLIGHT;}
 
+    public void intakereverse() {
+        intakeStateVar = intakeSTATE.REVERSE;
+    }
+
+    public void intakereverseS() {
+        intakeStateVar = intakeSTATE.REVERSESLIGHT;
+    }
 
 
     //this is where you put all enums and variables
     public PowerSUB(HardwareMap hwMap) {
-        shooterL = hwMap.get(DcMotorEx.class,"shooterL");
-        shooterR = hwMap.get(DcMotorEx.class,"shooterR");
-        intakeR = hwMap.get(DcMotor.class,"intakeR");
+        shooterL = hwMap.get(DcMotorEx.class, "shooterL");
+        shooterR = hwMap.get(DcMotorEx.class, "shooterR");
+        intakeR = hwMap.get(DcMotor.class, "intakeR");
         intakeL = hwMap.get(DcMotor.class, "intakeL");
         intakeL.setDirection(DcMotorSimple.Direction.REVERSE);
         intakeR.setDirection(DcMotorSimple.Direction.FORWARD);
@@ -100,25 +119,29 @@ public class PowerSUB {
 
         switch (gunStateVar) {
             case ON:
-                shooterL.setVelocity(0.48*FlyUTIL.highvelo);
+                shooterL.setVelocity(0.48 * FlyUTIL.highvelo);
 
-                shooterR.setVelocity(0.48*FlyUTIL.highvelo);
+                shooterR.setVelocity(0.48 * FlyUTIL.highvelo);
                 break;
             case OFF:
                 shooterL.setVelocity(0.0);
 
                 shooterR.setVelocity(0.0);
                 break;
+            case LITTLE:
+                shooterL.setVelocity(0.4);
+                shooterR.setVelocity(0.4);
+                break;
 
             case EXTRA:
-                shooterR.setVelocity(0.7*FlyUTIL.highvelo);
+                shooterR.setVelocity(0.7 * FlyUTIL.highvelo);
 
-                shooterL.setVelocity(0.7*FlyUTIL.highvelo);
+                shooterL.setVelocity(0.7 * FlyUTIL.highvelo);
                 break;
             case IDLE:
-                shooterR.setVelocity(0.0*FlyUTIL.highvelo);
+                shooterR.setVelocity(0.0 * FlyUTIL.highvelo);
 
-                shooterL.setVelocity(0.0*FlyUTIL.highvelo);
+                shooterL.setVelocity(0.0 * FlyUTIL.highvelo);
                 break;
         }
     }
@@ -128,35 +151,36 @@ public class PowerSUB {
     public void telemetry(Telemetry telemetry) {
         double currentVeloL = shooterR.getVelocity();
         double currentVeloR = shooterL.getVelocity();
-        telemetry.addData("RVELO",currentVeloR);
-        telemetry.addData("LVELO",currentVeloL);
+        telemetry.addData("RVELO", currentVeloR);
+        telemetry.addData("LVELO", currentVeloL);
 
     }
-        // add telemetry data here
+    // add telemetry data here
 
 
-        class MotorAction implements Action {
-            List<Runnable> funcs;
-            private PowerSUB powersub;
+    class MotorAction implements Action {
+        List<Runnable> funcs;
+        private PowerSUB powersub;
 
-            public MotorAction(PowerSUB powersub, List<Runnable> funcs) {
-                this.funcs = funcs;
-                this.powersub = powersub;
+        public MotorAction(PowerSUB powersub, List<Runnable> funcs) {
+            this.funcs = funcs;
+            this.powersub = powersub;
+        }
+
+
+        @Override
+        public boolean run(@NonNull TelemetryPacket telemetryPacket) {
+            for (Runnable func : funcs) {
+                func.run();
             }
+            powersub.update();// removes the need for the update to be run after simply updating a claw
 
-
-            @Override
-            public boolean run(@NonNull TelemetryPacket telemetryPacket) {
-                for (Runnable func : funcs) {
-                    func.run();
-                }
-                powersub.update();// removes the need for the update to be run after simply updating a claw
-
-                return false;
-            }
+            return false;
+        }
 
     }
-    public Action gunAction(List<Runnable> funcs){
+
+    public Action gunAction(List<Runnable> funcs) {
         return new MotorAction(this, funcs);
     }
 }
