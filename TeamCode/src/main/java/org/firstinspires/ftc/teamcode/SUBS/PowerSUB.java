@@ -92,12 +92,12 @@ public class PowerSUB {
         // this is where you put your state machines and all power functions (call this in our main code)
         switch (intakeStateVar) {
             case ONL:
-                intakeL.setPower(1);
+                intakeL.setPower(0.9);
 
                 break;
             case ON:
-                intakeL.setPower(0.9);
-                intakeR.setPower(0.9);
+                intakeL.setPower(0.85);
+                intakeR.setPower(0.85);
                 break;
 
             case OFF:
@@ -119,9 +119,9 @@ public class PowerSUB {
 
         switch (gunStateVar) {
             case ON:
-                shooterL.setVelocity(0.48 * FlyUTIL.highvelo);
+                shooterL.setVelocity(0.465 * FlyUTIL.highvelo);
 
-                shooterR.setVelocity(0.48 * FlyUTIL.highvelo);
+                shooterR.setVelocity(0.465 * FlyUTIL.highvelo);
                 break;
             case OFF:
                 shooterL.setVelocity(0.0);
@@ -129,14 +129,14 @@ public class PowerSUB {
                 shooterR.setVelocity(0.0);
                 break;
             case LITTLE:
-                shooterL.setVelocity(0.43 * FlyUTIL.highvelo);
-                shooterR.setVelocity(0.43 * FlyUTIL.highvelo);
+                shooterL.setVelocity(0.44 * FlyUTIL.highvelo);
+                shooterR.setVelocity(0.44 * FlyUTIL.highvelo);
                 break;
 
             case EXTRA:
-                shooterR.setVelocity(0.7 * FlyUTIL.highvelo);
+                shooterR.setVelocity(0.53 * FlyUTIL.highvelo);
 
-                shooterL.setVelocity(0.7 * FlyUTIL.highvelo);
+                shooterL.setVelocity(0.53 * FlyUTIL.highvelo);
                 break;
             case IDLE:
                 shooterR.setVelocity(0.0 * FlyUTIL.highvelo);

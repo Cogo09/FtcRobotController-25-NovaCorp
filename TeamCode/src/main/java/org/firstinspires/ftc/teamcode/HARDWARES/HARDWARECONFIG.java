@@ -163,7 +163,7 @@ public class HARDWARECONFIG {
             slowmode = !slowmode;
         }
         touchpadwpressed = touchpadpressed;
-        double slowmodemultiplier = 0.5;
+        double slowmodemultiplier = 0.8;
 
 
         touchpadwpressed = touchpadpressed;

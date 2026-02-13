@@ -10,7 +10,7 @@ import org.firstinspires.ftc.teamcode.HARDWARES.AUTOHARDWARE;
 
 
 @Autonomous
-public class TEST extends LinearOpMode {
+public class RED9C extends LinearOpMode {
     AUTOHARDWARE robot = null;
     ///
     ///
@@ -29,7 +29,7 @@ public class TEST extends LinearOpMode {
         robot = new AUTOHARDWARE(this, hardwareMap, new Pose2d(-52,50,Math.toRadians(145)));
         waitForStart();
         if (opModeIsActive()){
-            robot.RED12C();
+            robot.RED9C();
 
             blackboard.put(currentpose,robot.drive.localizer.getPose());
         }
