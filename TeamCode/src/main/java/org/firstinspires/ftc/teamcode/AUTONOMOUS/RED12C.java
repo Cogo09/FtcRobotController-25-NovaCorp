@@ -10,7 +10,7 @@ import org.firstinspires.ftc.teamcode.HARDWARES.AUTOHARDWARE;
 
 
 @Autonomous
-public class TEST extends LinearOpMode {
+public class RED12C extends LinearOpMode {
     AUTOHARDWARE robot = null;
     ///
     ///

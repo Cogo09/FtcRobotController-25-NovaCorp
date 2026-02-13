@@ -92,7 +92,7 @@ public class AUTOHARDWARE extends HARDWARECONFIG {
         Actions.runBlocking(
                 new SequentialAction(
                         drive.actionBuilder(new Pose2d(-52,-50,Math.toRadians(220)))
-                                .splineToLinearHeading(new Pose2d(-24, -45, Math.toRadians(180)), 1)
+                                .splineToLinearHeading(new Pose2d(-30, -40, Math.toRadians(180)), 1)
                                 .build(),
                         endAction()
                 )
@@ -104,7 +104,7 @@ public class AUTOHARDWARE extends HARDWARECONFIG {
         Actions.runBlocking(
                 new SequentialAction(
                         drive.actionBuilder(new Pose2d(-52,50,Math.toRadians(145)))
-                                .splineToLinearHeading(new Pose2d(-24, 45, Math.toRadians(180)), 1)
+                                .splineToLinearHeading(new Pose2d(-30, 40, Math.toRadians(180)), 1)
                                 .build(),
                         endAction()
                 )
@@ -139,7 +139,7 @@ public class AUTOHARDWARE extends HARDWARECONFIG {
                         //||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
                         //HERE IS THE PRELOAD
 
-                        //HERE IS THE SECOND BALL THINGY
+                        //HERE IS THE SECOND BALL pickup
                         //||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
                         //\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
 
@@ -166,7 +166,7 @@ public class AUTOHARDWARE extends HARDWARECONFIG {
                         ),
                         //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
                         //||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-                        //SECOND BALL THINGY
+                        //SECOND BALL pickup
 
 
                         //Here is the second shot
@@ -197,7 +197,7 @@ public class AUTOHARDWARE extends HARDWARECONFIG {
 
 
 
-                        //pickup third set UNTESTED
+                        //pickup third set
                         //||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
                         //\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
                         new SequentialAction(
@@ -221,10 +221,10 @@ public class AUTOHARDWARE extends HARDWARECONFIG {
                         ),
                         //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
                         //||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-                        //pickup third UNTESTED
+                        //pickup third
 
 
-                        //shoot third UNTESTED
+                        //shoot third
                         //||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
                         //\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
                         new SequentialAction(
@@ -248,60 +248,203 @@ public class AUTOHARDWARE extends HARDWARECONFIG {
                         )
 //                        //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 //                        //||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-//                        //Shoot third UNTESTED
-//
-//                        //pickup fourth UNTESTED
-//                        //||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-//                        //\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
-//                        new SequentialAction(
-//                                drive.actionBuilder(new Pose2d(-18,18,Math.toRadians(145)))
-//                                        .strafeToLinearHeading(new Vector2d(20,20),Math.toRadians(90))
-//                                        .turnTo(91)
-//                                        .build(),
-//                                endAction()
-//                        ),
-//                        new SequentialAction(
-//                                powersub.gunAction(List.of(()-> powersub.intakeonl()))
-//                        ),
-//                        new SequentialAction(
-//                                drive.actionBuilder(new Pose2d(20,20,Math.toRadians(90)))
-//                                        .setTangent(0)
-//
-//                                        .strafeToLinearHeading(new Vector2d(20,38),Math.toRadians(91))
-//                                        .build(),
-//                                endAction()
-//                        ),
-//                        new SequentialAction(
-//                                powersub.gunAction(List.of(()->powersub.intakeoff()))
-//                        ),
+//                        //Shoot third
+
+                ));
+    }//
+    public void BLUE12C() {
+        drivefinished = true;
+        Actions.runBlocking(
+                new SequentialAction(
+                        new SequentialAction(
+                                drive.actionBuilder(new Pose2d(-52,-50,Math.toRadians(220)))
+                                        .lineToXConstantHeading(-25)
+                                        .turnTo(Math.toRadians(218))
+                                        .build(),
+                                endAction()
+
+                        ),
+                        new SequentialAction(
+                                powersub.gunAction(List.of(() -> powersub.power()))
+                        ),
+                        new SleepAction(1),
+                        new SequentialAction(
+                                powersub.gunAction(List.of(() -> powersub.intakeon()))
+                        ),
+                        new SleepAction(1),
+                        new SequentialAction(
+                                powersub.gunAction(List.of(() -> powersub.intakeoff()))
+                        ),
+                        //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        //||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+                        //HERE IS THE PRELOAD
+
+                        //HERE IS THE SECOND BALL pickup
+                        //||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+                        //\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
+
+                        new SequentialAction(
+                                drive.actionBuilder(new Pose2d(-25,-20,Math.toRadians(218)))
+                                        .strafeToLinearHeading(new Vector2d(-12,-20),Math.toRadians(270))
+                                        .turnTo(Math.toRadians(268))
+                                        .build(),
+                                endAction()
+                        ),
+                        new SequentialAction(
+                                powersub.gunAction(List.of(()-> powersub.intakeonl()))
+                        ),
+                        new SequentialAction(
+                                drive.actionBuilder(new Pose2d(-12,-20,Math.toRadians(268)))
+                                        .setTangent(0)
+
+                                        .strafeToLinearHeading(new Vector2d(-12,-43),Math.toRadians(265))
+                                        .build(),
+                                endAction()
+                        ),
+                        new SequentialAction(
+                                powersub.gunAction(List.of(()->powersub.intakeoff())),
+                                powersub.gunAction(List.of(()-> powersub.gunoff()))
+                        ),
+                        //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        //||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+                        //SECOND BALL pickup
+
+
+
+                        new SequentialAction(
+                                drive.actionBuilder(new Pose2d(-12,-43,Math.toRadians(265)))
+                                        .turnTo(Math.toRadians(185))
+                                        .lineToX(-12)
+                                        .strafeToLinearHeading(new Vector2d(-10,-72),Math.toRadians(185))
+                                        .build(),
+                                endAction()
+                        ),
+
+                        //Here is the second shot
+                        //||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+                        //\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
+                        new SequentialAction(
+                                drive.actionBuilder(new Pose2d(-10,-72,Math.toRadians(185)))
+                                        .strafeToLinearHeading(new Vector2d(-18,-18),Math.toRadians(220))
+                                        .turnTo(Math.toRadians(225))
+                                        .build(),
+                                endAction()
+                        ),
+                        new SequentialAction(
+                                powersub.gunAction(List.of(() -> powersub.littlepower()))
+                        ),
+                        new SleepAction(1),
+                        new SequentialAction(
+                                powersub.gunAction(List.of(() -> powersub.intakeon()))
+                        ),
+                        new SleepAction(1.3),
+                        new SequentialAction(
+                                powersub.gunAction(List.of(() -> powersub.intakeoff()))
+                        ),
+                        //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        //||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+                        //second shot
+
+
+
+                        //pickup third set
+                        //||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+                        //\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
+                        new SequentialAction(
+                                drive.actionBuilder(new Pose2d(-16, -18,Math.toRadians(225)))
+                                        .strafeToLinearHeading(new Vector2d(10,-20),Math.toRadians(270))
+
+                                        .build(),
+                                endAction()
+                        ),
+                        new SequentialAction(
+                                powersub.gunAction(List.of(()-> powersub.intakeonl()))
+                        ),
+                        new SequentialAction(
+                                drive.actionBuilder(new Pose2d(13,-20,Math.toRadians(270)))
+                                        .lineToYConstantHeading(-50)
+                                        .build(),
+                                endAction()
+                        ),
+                        new SequentialAction(
+                                powersub.gunAction(List.of(()->powersub.intakeoff()))
+                        ),
+                        //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        //||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+                        //pickup third
+
+
+                        //shoot third UNTESTED
+                        //||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+                        //\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
+                        new SequentialAction(
+                                drive.actionBuilder(new Pose2d(13,-38,Math.toRadians(269)))
+                                        .strafeToLinearHeading(new Vector2d(-18,-18),Math.toRadians(220))
+                                        .turnTo(Math.toRadians(225))
+                                        .build(),
+                                endAction()
+                        ),
+                        //new SleepAction(0.5),
+                        new SequentialAction(
+                                powersub.gunAction(List.of(() -> powersub.intakeon()))
+                        ),
+                        new SleepAction(1),
+                        new SequentialAction(
+                                powersub.gunAction(List.of(() -> powersub.intakeoff()))
+
+                        ),
+                        //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        //||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+                        //Shoot third
+
+                        //pickup fourth
+                        //||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+                        //\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
+                        new SequentialAction(
+                                drive.actionBuilder(new Pose2d(-18,-18,Math.toRadians(225)))
+                                        .strafeToLinearHeading(new Vector2d(37,-30),Math.toRadians(270))
+                                        .build(),
+                                endAction()
+                        ),
+                        new SequentialAction(
+                                powersub.gunAction(List.of(()-> powersub.intakeonl()))
+                        ),
+                        new SequentialAction(
+                                drive.actionBuilder(new Pose2d(37,-30,Math.toRadians(270)))
+
+                                        .strafeToLinearHeading(new Vector2d(37,-65),Math.toRadians(270))
+                                        .build(),
+                                endAction()
+                        ),
+                        new SequentialAction(
+                                powersub.gunAction(List.of(()->powersub.intakeoff()))
+                        ),
+                        //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        //||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+                        //pickup fourth
+
+                        //shoot fourth
+                        //||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+                        //\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
+                        new SequentialAction(
+                                drive.actionBuilder(new Pose2d(37,-65,Math.toRadians(270)))
+                                        .strafeToLinearHeading(new Vector2d(-18,-18),Math.toRadians(220))
+                                        .build(),
+                                endAction()
+                        ),
+
+                        //new SleepAction(0.5),
+                        new SequentialAction(
+                                powersub.gunAction(List.of(() -> powersub.intakeon()))
+                        ),
+                        new SleepAction(1),
+                        new SequentialAction(
+                                powersub.gunAction(List.of(() -> powersub.intakeoff())),
+                                powersub.gunAction(List.of(() -> powersub.gunoff()))
+                        )
 //                        //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 //                        //||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-//                        //pickup fourth UNTESTED
-//
-//                        //shoot fourth UNTESTED
-//                        //||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-//                        //\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
-//                        new SequentialAction(
-//                                drive.actionBuilder(new Pose2d(10,38,Math.toRadians(91)))
-//                                        .strafeToLinearHeading(new Vector2d(-18,18),Math.toRadians(145))
-//                                        .build(),
-//                                endAction()
-//                        ),
-//                        new SequentialAction(
-//                                powersub.gunAction(List.of(() -> powersub.littlepower()))
-//                        ),
-//                        new SleepAction(0.5),
-//                        new SequentialAction(
-//                                powersub.gunAction(List.of(() -> powersub.intakeon()))
-//                        ),
-//                        new SleepAction(1),
-//                        new SequentialAction(
-//                                powersub.gunAction(List.of(() -> powersub.intakeoff())),
-//                                powersub.gunAction(List.of(() -> powersub.gunoff()))
-//                        )
-//                        //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-//                        //||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-//                        //pickup fourth UNTESTED
+//                        //pickup fourth
 //
 
                 ));
@@ -327,14 +470,13 @@ public class AUTOHARDWARE extends HARDWARECONFIG {
                         ),
                         new SleepAction(1),
                         new SequentialAction(
-                                powersub.gunAction(List.of(() -> powersub.intakeoff())),
-                                powersub.gunAction(List.of(() -> powersub.gunoff()))
+                                powersub.gunAction(List.of(() -> powersub.intakeoff()))
                         ),
                         //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
                         //||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
                         //HERE IS THE PRELOAD
 
-                        //HERE IS THE SECOND BALL THINGY
+                        //HERE IS THE SECOND BALL pickup
                         //||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
                         //\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
 
@@ -357,11 +499,12 @@ public class AUTOHARDWARE extends HARDWARECONFIG {
                                 endAction()
                         ),
                         new SequentialAction(
-                                powersub.gunAction(List.of(()->powersub.intakeoff()))
+                                powersub.gunAction(List.of(()->powersub.intakeoff())),
+                                powersub.gunAction(List.of(()-> powersub.gunoff()))
                         ),
                         //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
                         //||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-                        //SECOND BALL THINGY
+                        //SECOND BALL pickup
 
 
 
@@ -393,8 +536,7 @@ public class AUTOHARDWARE extends HARDWARECONFIG {
                         ),
                         new SleepAction(1.3),
                         new SequentialAction(
-                                powersub.gunAction(List.of(() -> powersub.intakeoff())),
-                                powersub.gunAction(List.of(() -> powersub.gunoff()))
+                                powersub.gunAction(List.of(() -> powersub.intakeoff()))
                         ),
                         //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
                         //||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
@@ -402,7 +544,7 @@ public class AUTOHARDWARE extends HARDWARECONFIG {
 
 
 
-                        //pickup third set UNTESTED
+                        //pickup third set
                         //||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
                         //\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
                         new SequentialAction(
@@ -426,10 +568,10 @@ public class AUTOHARDWARE extends HARDWARECONFIG {
                         ),
                         //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
                         //||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-                        //pickup third UNTESTED
+                        //pickup third
 
 
-                        //shoot third UNTESTED
+                        //shoot third
                         //||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
                         //\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
                         new SequentialAction(
@@ -439,23 +581,20 @@ public class AUTOHARDWARE extends HARDWARECONFIG {
                                         .build(),
                                 endAction()
                         ),
-                        new SequentialAction(
-                                powersub.gunAction(List.of(() -> powersub.littlepower()))
-                        ),
-                        new SleepAction(0.5),
+                        //new SleepAction(0.5),
                         new SequentialAction(
                                 powersub.gunAction(List.of(() -> powersub.intakeon()))
                         ),
                         new SleepAction(1),
                         new SequentialAction(
-                                powersub.gunAction(List.of(() -> powersub.intakeoff())),
-                                powersub.gunAction(List.of(() -> powersub.gunoff()))
+                                powersub.gunAction(List.of(() -> powersub.intakeoff()))
+
                         ),
                         //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
                         //||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-                        //Shoot third UNTESTED
+                        //Shoot third
 
-                        //pickup fourth UNTESTED
+                        //pickup fourth
                         //||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
                         //\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
                         new SequentialAction(
@@ -479,9 +618,9 @@ public class AUTOHARDWARE extends HARDWARECONFIG {
                         ),
                         //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
                         //||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-                        //pickup fourth UNTESTED
+                        //pickup fourth
 
-                        //shoot fourth UNTESTED
+                        //shoot fourth
                         //||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
                         //\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
                         new SequentialAction(
@@ -490,10 +629,8 @@ public class AUTOHARDWARE extends HARDWARECONFIG {
                                         .build(),
                                 endAction()
                         ),
-                        new SequentialAction(
-                                powersub.gunAction(List.of(() -> powersub.littlepower()))
-                        ),
-                        new SleepAction(0.5),
+
+                        //new SleepAction(0.5),
                         new SequentialAction(
                                 powersub.gunAction(List.of(() -> powersub.intakeon()))
                         ),
@@ -504,7 +641,7 @@ public class AUTOHARDWARE extends HARDWARECONFIG {
                         )
 //                        //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 //                        //||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-//                        //pickup fourth UNTESTED
+//                        //shoot fourth
 //
 
                 ));
@@ -537,7 +674,7 @@ public class AUTOHARDWARE extends HARDWARECONFIG {
                         //||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
                         //HERE IS THE PRELOAD
 
-                        //HERE IS THE SECOND BALL THINGY
+                        //HERE IS THE SECOND BALL pickup
                         //||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
                         //\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
 
@@ -564,7 +701,7 @@ public class AUTOHARDWARE extends HARDWARECONFIG {
                         ),
                         //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
                         //||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-                        //SECOND BALL THINGY
+                        //SECOND BALL pickup
 
 
                         //Here is the second shot
@@ -595,7 +732,7 @@ public class AUTOHARDWARE extends HARDWARECONFIG {
 
 
 
-                        //pickup third set UNTESTED
+                        //pickup third set
                         //||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
                         //\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
                         new SequentialAction(
@@ -619,10 +756,10 @@ public class AUTOHARDWARE extends HARDWARECONFIG {
                         ),
                         //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
                         //||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-                        //pickup third UNTESTED
+                        //pickup third
 
 
-                        //shoot third UNTESTED
+                        //shoot third
                         //||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
                         //\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
                         new SequentialAction(
@@ -645,61 +782,7 @@ public class AUTOHARDWARE extends HARDWARECONFIG {
                         )
 //                        //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 //                        //||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-//                        //Shoot third UNTESTED
-//
-//                        //pickup fourth UNTESTED
-//                        //||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-//                        //\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
-//                        new SequentialAction(
-//                                drive.actionBuilder(new Pose2d(-18,18,Math.toRadians(145)))
-//                                        .strafeToLinearHeading(new Vector2d(20,20),Math.toRadians(90))
-//                                        .turnTo(91)
-//                                        .build(),
-//                                endAction()
-//                        ),
-//                        new SequentialAction(
-//                                powersub.gunAction(List.of(()-> powersub.intakeonl()))
-//                        ),
-//                        new SequentialAction(
-//                                drive.actionBuilder(new Pose2d(20,20,Math.toRadians(90)))
-//                                        .setTangent(0)
-//
-//                                        .strafeToLinearHeading(new Vector2d(20,38),Math.toRadians(91))
-//                                        .build(),
-//                                endAction()
-//                        ),
-//                        new SequentialAction(
-//                                powersub.gunAction(List.of(()->powersub.intakeoff()))
-//                        ),
-//                        //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-//                        //||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-//                        //pickup fourth UNTESTED
-//
-//                        //shoot fourth UNTESTED
-//                        //||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-//                        //\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
-//                        new SequentialAction(
-//                                drive.actionBuilder(new Pose2d(10,38,Math.toRadians(91)))
-//                                        .strafeToLinearHeading(new Vector2d(-18,18),Math.toRadians(145))
-//                                        .build(),
-//                                endAction()
-//                        ),
-//                        new SequentialAction(
-//                                powersub.gunAction(List.of(() -> powersub.littlepower()))
-//                        ),
-//                        new SleepAction(0.5),
-//                        new SequentialAction(
-//                                powersub.gunAction(List.of(() -> powersub.intakeon()))
-//                        ),
-//                        new SleepAction(1),
-//                        new SequentialAction(
-//                                powersub.gunAction(List.of(() -> powersub.intakeoff())),
-//                                powersub.gunAction(List.of(() -> powersub.gunoff()))
-//                        )
-//                        //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-//                        //||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-//                        //pickup fourth UNTESTED
-//
+//                        //Shoot third
 
                 ));
     }
@@ -709,7 +792,7 @@ public class AUTOHARDWARE extends HARDWARECONFIG {
         Actions.runBlocking(
                 new SequentialAction(
                         drive.actionBuilder(new Pose2d(57,20,Math.toRadians(180)))
-                                .lineToX(30)
+                                .strafeToLinearHeading(new Vector2d(57,30),Math.toRadians(180))
                                 .build(),
                         endAction()
                 )
@@ -721,296 +804,34 @@ public class AUTOHARDWARE extends HARDWARECONFIG {
         Actions.runBlocking(
                 new SequentialAction(
                         drive.actionBuilder(new Pose2d(57,-20,Math.toRadians(180)))
-                                .lineToX(30)
+                                .strafeToLinearHeading(new Vector2d(57,-30),Math.toRadians(180))
                                 .build(),
                         endAction()
                 )
         );
     }
-
-
-
-
-    public void PREBC12() {
+    public void REDFAR3(){
         drivefinished = true;
         Actions.runBlocking(
                 new SequentialAction(
-                        new SequentialAction(
-                                drive.actionBuilder(new Pose2d(-52,-50,Math.toRadians(220)))
-                                        .lineToXConstantHeading(-13)
-                                        .build(),
-                                endAction()
-                        ),
-                        new SequentialAction(
-                                powersub.gunAction(List.of(() -> powersub.power())),
-                                servosub.servoAction(List.of(() -> servosub.Safetyoff())),
-                                powersub.gunAction(List.of(() -> powersub.intakeon()))
-                        ),
-                        new SleepAction(1),
-                        new SequentialAction(
-                                powersub.gunAction(List.of(() -> powersub.gunoff())),
-                                servosub.servoAction(List.of(() -> servosub.SafetyON())),
-                                powersub.gunAction(List.of(() -> powersub.intakeoff()))
-                        ),
-                        new SequentialAction(
-                                drive.actionBuilder(new Pose2d(-13,30,Math.toRadians(220)))
-                                        .splineToLinearHeading(new Pose2d(-13, -27, Math.toRadians(270)), 0)
-                                        .turnTo(Math.toRadians(271))
-                                        .build(),
-                                endAction()
-                        ),
-                        new SequentialAction(
-                                powersub.gunAction(List.of(() -> powersub.intakeon()))
-                        ),
-                        new SequentialAction(
-                                drive.actionBuilder(new Pose2d(-13,-27,Math.toRadians(270)))
-                                        .lineToY(-50)
-                                        .build(),
-                                endAction()
-                        ),
-                        new SequentialAction(
-                                powersub.gunAction(List.of(() -> powersub.intakeoff()))
-                        ),
-                        new SequentialAction(
-                                drive.actionBuilder(new Pose2d(-13,-50,Math.toRadians(270)))
-                                        .splineToLinearHeading(new Pose2d(-13, -20, Math.toRadians(220)), 0)
-                                        .build(),
-                                endAction()
-                        ),
-                        new SequentialAction(
-                                powersub.gunAction(List.of(() -> powersub.power())),
-                                servosub.servoAction(List.of(() -> servosub.Safetyoff())),
-                                powersub.gunAction(List.of(() -> powersub.intakeon()))
-                        ),
-                        new SleepAction(1),
-                        new SequentialAction(
-                                powersub.gunAction(List.of(() -> powersub.gunoff())),
-                                servosub.servoAction(List.of(() -> servosub.SafetyON())),
-                                powersub.gunAction(List.of(() -> powersub.intakeoff()))
-                        ),
-                        new SequentialAction(
-                                drive.actionBuilder(new Pose2d(-13,-20,Math.toRadians(220)))
-                                        .splineToLinearHeading(new Pose2d(13, -20, Math.toRadians(270)), 0)
-                                        .build(),
-                                endAction()
-                        ),
-                        new SequentialAction(
-                                powersub.gunAction(List.of(() -> powersub.intakeon()))
-                        ),
-                        new SequentialAction(
-                                drive.actionBuilder(new Pose2d(13,-20,Math.toRadians(270)))
-                                        .lineToY(-50)
-                                        .lineToY(-48)
-                                        .build(),
-                                endAction()
-                        ),
-                        new SequentialAction(
-                                powersub.gunAction(List.of(() -> powersub.intakeoff()))
-                        ),
-                        new SequentialAction(
-                                drive.actionBuilder(new Pose2d(-13,-48,Math.toRadians(270)))
-                                        .splineToLinearHeading(new Pose2d(-13, -20, Math.toRadians(220)), 0)
-                                        .build(),
-                                endAction()
-                        ),
-                        new SequentialAction(
-                                powersub.gunAction(List.of(() -> powersub.power())),
-                                servosub.servoAction(List.of(() -> servosub.Safetyoff())),
-                                powersub.gunAction(List.of(() -> powersub.intakeon()))
-                        ),
-                        new SleepAction(1),
-                        new SequentialAction(
-                                powersub.gunAction(List.of(() -> powersub.gunoff())),
-                                servosub.servoAction(List.of(() -> servosub.SafetyON())),
-                                powersub.gunAction(List.of(() -> powersub.intakeoff()))
-                        ),
-                        new SequentialAction(
-                                drive.actionBuilder(new Pose2d(-13,-20,Math.toRadians(220)))
-                                        .splineToLinearHeading(new Pose2d(25, -20, Math.toRadians(270)), 0)
-                                        .turnTo(Math.toRadians(271))
-                                        .build(),
-                                endAction()
-                        ),
-                        new SequentialAction(
-                                powersub.gunAction(List.of(() -> powersub.intakeon()))
-                        ),
-                        new SequentialAction(
-                                drive.actionBuilder(new Pose2d(25,-20,Math.toRadians(271)))
-                                        .lineToY(-50)
-                                        .build(),
-                                endAction()
-                        ),
-                        new SequentialAction(
-                                powersub.gunAction(List.of(() -> powersub.intakeoff()))
-                        ),
-                        new SequentialAction(
-                                drive.actionBuilder(new Pose2d(25,-50,Math.toRadians(271)))
-                                        .splineToLinearHeading(new Pose2d(-13, -20, Math.toRadians(220)), 0)
-                                        .build(),
-                                endAction()
-                        ),
-                        new SequentialAction(
-                                powersub.gunAction(List.of(() -> powersub.power())),
-                                servosub.servoAction(List.of(() -> servosub.Safetyoff())),
-                                powersub.gunAction(List.of(() -> powersub.intakeon()))
-                        ),
-                        new SleepAction(1),
-                        new SequentialAction(
-                                powersub.gunAction(List.of(() -> powersub.gunoff())),
-                                servosub.servoAction(List.of(() -> servosub.SafetyON())),
-                                powersub.gunAction(List.of(() -> powersub.intakeoff()))
-                        ),
-                        new SequentialAction(
-                                drive.actionBuilder(new Pose2d(-13,-20,Math.toRadians(220)))
-                                        .splineToLinearHeading(new Pose2d(10, -20, Math.toRadians(180)), 0)
-                                        .build(),
-                                endAction()
-                        )
-
+                        drive.actionBuilder(new Pose2d(57,20,Math.toRadians(180)))
+                                .turnTo(Math.toRadians(160))
+                                .build(),
+                        endAction()
                 )
         );
     }
-
-    public void PRERC12() {
+    public void BLUEFAR3(){
         drivefinished = true;
         Actions.runBlocking(
                 new SequentialAction(
-                        new SequentialAction(
-                                drive.actionBuilder(new Pose2d(-52,50,Math.toRadians(145)))
-                                        .lineToXConstantHeading(-13)
-                                        .build(),
-                                endAction()
-                        ),
-                        new SequentialAction(
-                                powersub.gunAction(List.of(() -> powersub.power())),
-                                servosub.servoAction(List.of(() -> servosub.Safetyoff())),
-                                powersub.gunAction(List.of(() -> powersub.intakeon()))
-                        ),
-                        new SleepAction(1),
-                        new SequentialAction(
-                                powersub.gunAction(List.of(() -> powersub.gunoff())),
-                                servosub.servoAction(List.of(() -> servosub.SafetyON())),
-                                powersub.gunAction(List.of(() -> powersub.intakeoff()))
-                        ),
-                        new SequentialAction(
-                                drive.actionBuilder(new Pose2d(-13,50,Math.toRadians(145)))
-                                        .splineToLinearHeading(new Pose2d(-13, 27, Math.toRadians(90)), 0)
-                                        .turnTo(Math.toRadians(91))
-                                        .build(),
-                                endAction()
-                        ),
-                        new SequentialAction(
-                                powersub.gunAction(List.of(() -> powersub.intakeon()))
-                        ),
-                        new SequentialAction(
-                                drive.actionBuilder(new Pose2d(-13,27,Math.toRadians(90)))
-                                        .lineToY(50)
-                                        .build(),
-                                endAction()
-                        ),
-                        new SequentialAction(
-                                powersub.gunAction(List.of(() -> powersub.intakeoff()))
-                        ),
-                        new SequentialAction(
-                                drive.actionBuilder(new Pose2d(-13,50,Math.toRadians(90)))
-                                        .splineToLinearHeading(new Pose2d(-13, 20, Math.toRadians(145)), 0)
-                                        .build(),
-                                endAction()
-                        ),
-                        new SequentialAction(
-                                powersub.gunAction(List.of(() -> powersub.power())),
-                                servosub.servoAction(List.of(() -> servosub.Safetyoff())),
-                                powersub.gunAction(List.of(() -> powersub.intakeon()))
-                        ),
-                        new SleepAction(1),
-                        new SequentialAction(
-                                powersub.gunAction(List.of(() -> powersub.gunoff())),
-                                servosub.servoAction(List.of(() -> servosub.SafetyON())),
-                                powersub.gunAction(List.of(() -> powersub.intakeoff()))
-                        ),
-                        new SequentialAction(
-                                drive.actionBuilder(new Pose2d(-13,20,Math.toRadians(90)))
-                                        .splineToLinearHeading(new Pose2d(13, 20, Math.toRadians(90)), 0)
-                                        .build(),
-                                endAction()
-                        ),
-                        new SequentialAction(
-                                powersub.gunAction(List.of(() -> powersub.intakeon()))
-                        ),
-                        new SequentialAction(
-                                drive.actionBuilder(new Pose2d(13,20,Math.toRadians(90)))
-                                        .lineToY(50)
-                                        .lineToY(48)
-                                        .build(),
-                                endAction()
-                        ),
-                        new SequentialAction(
-                                powersub.gunAction(List.of(() -> powersub.intakeoff()))
-                        ),
-                        new SequentialAction(
-                                drive.actionBuilder(new Pose2d(13,48,Math.toRadians(90)))
-                                        .splineToLinearHeading(new Pose2d(-13, 20, Math.toRadians(145)), 0)
-                                        .build(),
-                                endAction()
-                        ),
-                        new SequentialAction(
-                                powersub.gunAction(List.of(() -> powersub.power())),
-                                servosub.servoAction(List.of(() -> servosub.Safetyoff())),
-                                powersub.gunAction(List.of(() -> powersub.intakeon()))
-                        ),
-                        new SleepAction(1),
-                        new SequentialAction(
-                                powersub.gunAction(List.of(() -> powersub.gunoff())),
-                                servosub.servoAction(List.of(() -> servosub.SafetyON())),
-                                powersub.gunAction(List.of(() -> powersub.intakeoff()))
-                        ),
-                        new SequentialAction(
-                                drive.actionBuilder(new Pose2d(-13,20,Math.toRadians(145)))
-                                        .splineToLinearHeading(new Pose2d(25, 20, Math.toRadians(90)), 0)
-                                        .turnTo(Math.toRadians(91))
-                                        .build(),
-                                endAction()
-                        ),
-                        new SequentialAction(
-                                powersub.gunAction(List.of(() -> powersub.intakeon()))
-                        ),
-                        new SequentialAction(
-                                drive.actionBuilder(new Pose2d(25,20,Math.toRadians(90)))
-                                        .lineToY(50)
-                                        .build(),
-                                endAction()
-                        ),
-                        new SequentialAction(
-                                powersub.gunAction(List.of(() -> powersub.intakeoff()))
-                        ),
-                        new SequentialAction(
-                                drive.actionBuilder(new Pose2d(25,50,Math.toRadians(90)))
-                                        .splineToLinearHeading(new Pose2d(-13, 20, Math.toRadians(145)), 0)
-                                        .build(),
-                                endAction()
-                        ),
-                        new SequentialAction(
-                                powersub.gunAction(List.of(() -> powersub.power())),
-                                servosub.servoAction(List.of(() -> servosub.Safetyoff())),
-                                powersub.gunAction(List.of(() -> powersub.intakeon()))
-                        ),
-                        new SleepAction(1),
-                        new SequentialAction(
-                                powersub.gunAction(List.of(() -> powersub.gunoff())),
-                                servosub.servoAction(List.of(() -> servosub.SafetyON())),
-                                powersub.gunAction(List.of(() -> powersub.intakeoff()))
-                        ),
-                        new SequentialAction(
-                                drive.actionBuilder(new Pose2d(-13,20,Math.toRadians(145)))
-                                        .splineToLinearHeading(new Pose2d(10, 20, Math.toRadians(180)), 0)
-                                        .build(),
-                                endAction()
-                        )
-
+                        drive.actionBuilder(new Pose2d(57,-20,Math.toRadians(180)))
+                                .turnTo(Math.toRadians(200))
+                                .build(),
+                        endAction()
                 )
         );
     }
-
     public void LEVIAUTOB() {
         drivefinished = true;
         Actions.runBlocking(

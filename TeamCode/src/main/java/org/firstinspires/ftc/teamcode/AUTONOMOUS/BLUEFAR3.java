@@ -10,7 +10,7 @@ import org.firstinspires.ftc.teamcode.HARDWARES.AUTOHARDWARE;
 
 
 @Autonomous
-public class FLLB extends LinearOpMode {
+public class BLUEFAR3 extends LinearOpMode {
     AUTOHARDWARE robot = null;
     ///
     ///
@@ -29,7 +29,7 @@ public class FLLB extends LinearOpMode {
         robot = new AUTOHARDWARE(this, hardwareMap, new Pose2d(57,-20,Math.toRadians(180)));
         waitForStart();
         if (opModeIsActive()){
-            robot.FLLB();
+            robot.BLUEFAR3();
             blackboard.put(currentpose,robot.drive.localizer.getPose());
         }
     }
