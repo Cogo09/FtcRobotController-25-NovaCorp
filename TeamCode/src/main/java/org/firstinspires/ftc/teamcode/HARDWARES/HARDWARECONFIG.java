@@ -230,6 +230,10 @@ public class HARDWARECONFIG {
         }else {
             powersub.gunidle();
         }
+        if (opMode.gamepad2.a){
+            powersub.extralittle();
+
+        }
 
         if (opMode.gamepad2.dpad_up){
             servosub.SafetyON();

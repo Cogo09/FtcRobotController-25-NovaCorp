@@ -21,7 +21,7 @@ public class PowerSUB {
     private DcMotorEx shooterR;
     private DcMotorEx shooterL;
 
-    public enum gunSTATE {ON, OFF, EXTRA, LITTLE, IDLE}
+    public enum gunSTATE {ON, OFF, EXTRA, LITTLE, EXTRALITTLE, IDLE}
 
     //!help
     private PowerSUB.gunSTATE gunStateVar = PowerSUB.gunSTATE.IDLE;
@@ -33,6 +33,7 @@ public class PowerSUB {
     public void littlepower() {
         gunStateVar = gunSTATE.LITTLE;
     }
+    public void extralittle(){gunStateVar = gunSTATE.EXTRALITTLE;}
 
     public void gunoff() {
         gunStateVar = gunSTATE.OFF;
@@ -132,11 +133,15 @@ public class PowerSUB {
                 shooterL.setVelocity(0.44 * FlyUTIL.highvelo);
                 shooterR.setVelocity(0.44 * FlyUTIL.highvelo);
                 break;
+            case EXTRALITTLE:
+                shooterL.setVelocity(0.42*FlyUTIL.highvelo);
+                shooterR.setVelocity(0.42*FlyUTIL.highvelo);
+                break;
 
             case EXTRA:
-                shooterR.setVelocity(0.53 * FlyUTIL.highvelo);
+                shooterR.setVelocity(0.54 * FlyUTIL.highvelo);
 
-                shooterL.setVelocity(0.53 * FlyUTIL.highvelo);
+                shooterL.setVelocity(0.54 * FlyUTIL.highvelo);
                 break;
             case IDLE:
                 shooterR.setVelocity(0.0 * FlyUTIL.highvelo);
