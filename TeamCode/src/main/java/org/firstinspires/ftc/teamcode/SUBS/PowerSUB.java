@@ -47,7 +47,7 @@ public class PowerSUB {
         gunStateVar = gunSTATE.IDLE;
     }
 
-    public enum intakeSTATE {ON, OFF, ONL, REVERSE, REVERSESLIGHT, IDLE}
+    public enum intakeSTATE {ON, OFF,ONSLOW, ONL, REVERSE, REVERSESLIGHT, IDLE}
 
     private PowerSUB.intakeSTATE intakeStateVar = PowerSUB.intakeSTATE.IDLE;
 
@@ -71,6 +71,7 @@ public class PowerSUB {
     public void intakereverseS() {
         intakeStateVar = intakeSTATE.REVERSESLIGHT;
     }
+    public void intakeonslow(){intakeStateVar = intakeSTATE.ONSLOW;}
 
 
     //this is where you put all enums and variables
@@ -109,6 +110,9 @@ public class PowerSUB {
                 intakeR.setPower(-1);
                 intakeL.setPower(-1);
                 break;
+            case ONSLOW:
+                intakeR.setPower(0.5);
+                intakeL.setPower(0.5);
             case REVERSESLIGHT:
                 intakeR.setPower(-1);
                 intakeL.setPower(-1);
@@ -139,9 +143,9 @@ public class PowerSUB {
                 break;
 
             case EXTRA:
-                shooterR.setVelocity(0.54 * FlyUTIL.highvelo);
+                shooterR.setVelocity(0.56 * FlyUTIL.highvelo);
 
-                shooterL.setVelocity(0.54 * FlyUTIL.highvelo);
+                shooterL.setVelocity(0.56 * FlyUTIL.highvelo);
                 break;
             case IDLE:
                 shooterR.setVelocity(0.0 * FlyUTIL.highvelo);
