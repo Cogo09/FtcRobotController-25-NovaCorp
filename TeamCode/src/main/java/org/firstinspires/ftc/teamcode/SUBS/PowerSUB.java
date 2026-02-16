@@ -80,6 +80,7 @@ public class PowerSUB {
         shooterR = hwMap.get(DcMotorEx.class, "shooterR");
         intakeR = hwMap.get(DcMotor.class, "intakeR");
         intakeL = hwMap.get(DcMotor.class, "intakeL");
+        intakeR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         intakeL.setDirection(DcMotorSimple.Direction.REVERSE);
         intakeR.setDirection(DcMotorSimple.Direction.FORWARD);
         shooterL.setDirection(DcMotorSimple.Direction.FORWARD);
@@ -98,8 +99,8 @@ public class PowerSUB {
 
                 break;
             case ON:
-                intakeL.setPower(0.85);
-                intakeR.setPower(0.85);
+                intakeL.setPower(0.75);
+                intakeR.setPower(0.75);
                 break;
 
             case OFF:
